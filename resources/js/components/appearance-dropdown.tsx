@@ -1,36 +1,40 @@
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu";
-import {Button} from "@/components/ui/button";
-import {Moon, Sun} from "lucide-react";
-import {useTheme} from "next-themes";
-import {cn} from "@/lib/utils";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Moon, MoonIcon, Sun, SunIcon } from "lucide-react";
+import { useTheme } from "next-themes";
+import { cn } from "@/lib/utils";
+import React from "react";
 
 const AppearanceDropdown = () => {
-    const {setTheme, theme} = useTheme();
+    const [mounted, setMounted] = React.useState(false);
+    const { theme, setTheme } = useTheme();
+
+    // useEffect only runs on the client, so now we can safely show the UI
+    React.useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) {
+        return null;
+    }
 
     return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    className={cn("h-7 w-7")}
-                >
-                    {theme == 'light' ? <Sun/> : <Moon/>}
-                    <span className="sr-only">Toggle theme</span>
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
-                    Light
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
-                    Dark
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
-                    System
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
+        <Button
+            variant="ghost"
+            // size="icon"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        >
+            {theme === "light" ? (
+                <MoonIcon className="transition-all" />
+            ) : (
+                <SunIcon className="transition-all" />
+            )}
+        </Button>
     );
 };
 
