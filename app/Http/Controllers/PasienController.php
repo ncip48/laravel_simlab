@@ -64,7 +64,15 @@ class PasienController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+        ], [
+            'name.required' => 'Nama tidak boleh kosong',
+            'address.required' => 'Alamat tidak boleh kosong',
+        ]);
+
+        Patient::where('id', $id)->update($request->all());
     }
 
     /**

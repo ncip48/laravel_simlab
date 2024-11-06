@@ -75,16 +75,26 @@ export function AddPasien() {
 }
 
 export function EditPasien({ item }: { item: PasienType }) {
-    const { data, setData, patch, errors, processing, recentlySuccessful } =
-        useForm({
-            name: item.name,
-            address: item.address,
-        });
+    const [open, setOpen] = useState(false);
+    const { data, setData, patch, errors, processing, reset } = useForm({
+        name: item.name,
+        address: item.address,
+    });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        patch(route("profile.update"));
+        patch(route("pasien.update", item.id), {
+            preserveScroll: true,
+            onSuccess: () => closeModal(),
+            onFinish: () => reset(),
+        });
+    };
+
+    const closeModal = () => {
+        toasterForm({ success: true, message: "Success" });
+        reset();
+        setOpen(false);
     };
     return (
         <ModalAction
@@ -94,6 +104,8 @@ export function EditPasien({ item }: { item: PasienType }) {
             isEdit
             description="Create a new banner with a unique name and username. This will
                     help identify the banner and its creator."
+            open={open}
+            setOpen={setOpen}
         >
             <div>
                 <Label htmlFor="name">Nama Pasien</Label>
@@ -103,7 +115,6 @@ export function EditPasien({ item }: { item: PasienType }) {
                     className="mt-1 block w-full"
                     value={data.name}
                     onChange={(e) => setData("name", e.target.value)}
-                    required
                     autoComplete="name"
                 />
 
@@ -113,15 +124,14 @@ export function EditPasien({ item }: { item: PasienType }) {
                 <Label htmlFor="name">Nama Pasien</Label>
 
                 <Textarea
-                    id="name"
+                    id="address"
                     className="mt-1 block w-full"
-                    value={data.name}
-                    onChange={(e) => setData("name", e.target.value)}
-                    required
-                    autoComplete="name"
+                    value={data.address}
+                    onChange={(e) => setData("address", e.target.value)}
+                    autoComplete="address"
                 />
 
-                <InputError className="mt-2" message={errors.name} />
+                <InputError className="mt-2" message={errors.address} />
             </div>
         </ModalAction>
     );
