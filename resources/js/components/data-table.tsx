@@ -29,6 +29,7 @@ interface DataTableProps<TData, TValue> {
     onDelete: (id: number) => React.ReactNode;
     onAdd: React.ReactNode;
     onEdit: (item: any) => React.ReactNode;
+    leftAction?: (item: any) => React.ReactNode;
 }
 
 export function DataTable<TData, TValue>({
@@ -38,6 +39,7 @@ export function DataTable<TData, TValue>({
     onDelete,
     onAdd,
     onEdit,
+    leftAction,
 }: DataTableProps<TData, TValue>) {
     const [columnFilters, setColumnFilters] =
         React.useState<ColumnFiltersState>([]);
@@ -125,6 +127,8 @@ export function DataTable<TData, TValue>({
                       )}
                     </TableCell> */}
                                     <TableCell className="flex gap-1">
+                                        {leftAction &&
+                                            leftAction(data[Number(row.id)])}
                                         {onEdit(data[Number(row.id)])}
                                         {onDelete(data[Number(row.id)]?.id)}
                                     </TableCell>

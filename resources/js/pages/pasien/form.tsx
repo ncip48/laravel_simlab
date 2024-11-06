@@ -100,10 +100,9 @@ export function EditPasien({ item }: { item: PasienType }) {
         <ModalAction
             submit={submit}
             processing={processing}
-            title="Add Banner"
+            title="Edit Pasien"
             isEdit
-            description="Create a new banner with a unique name and username. This will
-                    help identify the banner and its creator."
+            description="Edit pasien disini."
             open={open}
             setOpen={setOpen}
         >

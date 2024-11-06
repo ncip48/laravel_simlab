@@ -21,7 +21,7 @@ export const columns: ColumnDef<AlatType>[] = [
         header: "Folder",
     },
     {
-        accessorKey: "parameter",
+        accessorKey: "parameter_name",
         header: "Parameter",
     },
 ];

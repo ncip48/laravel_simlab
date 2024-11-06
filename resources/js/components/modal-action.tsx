@@ -15,7 +15,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { PencilIcon, PlusCircleIcon } from "lucide-react";
+import { LucideIcon, PencilIcon, PlusCircleIcon } from "lucide-react";
 import LoadingDots from "@/components/loading-dots";
 import { toasterForm } from "@/lib/utils";
 
@@ -29,6 +29,7 @@ export const ModalAction = ({
     setOpen,
     open,
     formData = false,
+    icon: Icon,
 }: {
     id?: string | null;
     submit: FormEventHandler;
@@ -40,14 +41,24 @@ export const ModalAction = ({
     open: boolean;
     setOpen: Dispatch<SetStateAction<boolean>>;
     formData?: boolean;
+    icon?: LucideIcon;
 }) => {
     const formRef = useRef<HTMLFormElement>(null);
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button size="sm">
-                    {!isEdit ? <PlusCircleIcon /> : <PencilIcon />}
-                    {!isEdit ? "Tambah" : ""}
+                <Button size="sm" variant={Icon ? "secondary" : "default"}>
+                    {Icon && <Icon />}
+                    {!Icon ? (
+                        !isEdit ? (
+                            <PlusCircleIcon />
+                        ) : (
+                            <PencilIcon />
+                        )
+                    ) : (
+                        <></>
+                    )}
+                    {!isEdit && !Icon ? "Tambah" : ""}
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">

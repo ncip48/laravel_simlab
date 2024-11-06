@@ -3,7 +3,7 @@ import { Head } from "@inertiajs/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "@/components/data-table";
 import { AlatType, columns } from "./columns";
-import { AddAlat, DeleteAlat, EditAlat } from "./form";
+import { AddAlat, DeleteAlat, EditAlat, ParameterAlat } from "./form";
 
 function TableAlat({ columns, data }: { columns: any; data: any }) {
     return (
@@ -14,6 +14,7 @@ function TableAlat({ columns, data }: { columns: any; data: any }) {
             onDelete={(id) => <DeleteAlat id={id} />}
             onAdd={<AddAlat />}
             onEdit={(dx) => <EditAlat item={dx} />}
+            leftAction={(dx) => <ParameterAlat item={dx} />}
         />
     );
 }
