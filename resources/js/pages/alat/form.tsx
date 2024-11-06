@@ -118,7 +118,7 @@ export function EditPasien({ item }: { item: PasienType }) {
                     autoComplete="name"
                 />
 
-                <InputError className="mt-1" message={errors.name} />
+                <InputError className="mt-2" message={errors.name} />
             </div>
             <div>
                 <Label htmlFor="name">Nama Pasien</Label>
@@ -131,7 +131,7 @@ export function EditPasien({ item }: { item: PasienType }) {
                     autoComplete="address"
                 />
 
-                <InputError className="mt-1" message={errors.address} />
+                <InputError className="mt-2" message={errors.address} />
             </div>
         </ModalAction>
     );

@@ -22,6 +22,7 @@ import { Link } from "@inertiajs/react";
 
 export function NavMain({
     items,
+    title,
 }: {
     items: {
         title: string;
@@ -33,12 +34,13 @@ export function NavMain({
             url: string;
         }[];
     }[];
+    title: string;
 }) {
     const { pathname } = window.location;
 
     return (
         <SidebarGroup>
-            <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+            <SidebarGroupLabel>{title}</SidebarGroupLabel>
             <SidebarMenu>
                 {items?.map((item, index) =>
                     item?.items && item.items.length > 0 ? (

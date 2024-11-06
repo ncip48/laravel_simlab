@@ -11,6 +11,7 @@ import {
     Speech,
     SquareActivity,
     SquareTerminal,
+    TowerControlIcon,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -50,16 +51,12 @@ const data = {
             url: "/hasil-pemeriksaan",
             icon: SquareActivity,
         },
+    ],
+    navAlat: [
         {
-            title: "Admin",
-            url: "#",
-            icon: Database,
-            items: [
-                {
-                    title: "Alat",
-                    url: "/alat",
-                },
-            ],
+            title: "Alat",
+            url: "/alat",
+            icon: TowerControlIcon,
         },
     ],
     navSecondary: [
@@ -103,7 +100,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </SidebarMenu>
             </SidebarHeader>
             <SidebarContent>
-                <NavMain items={data.navMain} />
+                <NavMain title="Utama" items={data.navMain} />
+                <NavMain title="Admin" items={data.navAlat} />
             </SidebarContent>
             <SidebarFooter>
                 <NavUser user={auth.user} />

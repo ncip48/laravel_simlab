@@ -21,13 +21,13 @@ function TablePasien({ columns, data }: { columns: any; data: any }) {
 
 export default function Pasien({ items }: { items: PasienType }) {
     return (
-        <AuthenticatedLayout header="Pasien">
-            <Head title="Pasien" />
+        <AuthenticatedLayout header="Alat">
+            <Head title="Alat" />
 
             <div className="">
                 <Card>
                     <CardHeader>
-                        <CardTitle>Pasien</CardTitle>
+                        <CardTitle>Alat</CardTitle>
                     </CardHeader>
                     <CardContent className="grid gap-4">
                         <TablePasien columns={columns} data={items} />
