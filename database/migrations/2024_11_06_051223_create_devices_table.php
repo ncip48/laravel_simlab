@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('folder');
-            $table->json('parameter');
+            $table->json('parameter')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

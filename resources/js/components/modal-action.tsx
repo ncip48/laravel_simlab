@@ -28,6 +28,7 @@ export const ModalAction = ({
     processing = false,
     setOpen,
     open,
+    formData = false,
 }: {
     id?: string | null;
     submit: FormEventHandler;
@@ -38,6 +39,7 @@ export const ModalAction = ({
     processing?: boolean;
     open: boolean;
     setOpen: Dispatch<SetStateAction<boolean>>;
+    formData?: boolean;
 }) => {
     const formRef = useRef<HTMLFormElement>(null);
     return (
@@ -49,7 +51,15 @@ export const ModalAction = ({
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
-                <form ref={formRef} onSubmit={submit}>
+                <form
+                    ref={formRef}
+                    onSubmit={submit}
+                    encType={
+                        formData
+                            ? "multipart/form-data"
+                            : "application/x-www-form-urlencoded"
+                    }
+                >
                     <DialogHeader>
                         <DialogTitle>{title}</DialogTitle>
                         <DialogDescription>{description}</DialogDescription>

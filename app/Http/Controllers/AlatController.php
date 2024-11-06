@@ -31,7 +31,15 @@ class AlatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'folder' => 'required',
+        ], [
+            'name.required' => 'Nama tidak boleh kosong',
+            'folder.required' => 'Alamat tidak boleh kosong',
+        ]);
+
+        Device::create($request->all());
     }
 
     /**
@@ -55,7 +63,15 @@ class AlatController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'folder' => 'required',
+        ], [
+            'name.required' => 'Nama tidak boleh kosong',
+            'folder.required' => 'Alamat tidak boleh kosong',
+        ]);
+
+        Device::where('id', $id)->update($request->all());
     }
 
     /**
@@ -63,6 +79,6 @@ class AlatController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Device::where('id', $id)->delete();
     }
 }

@@ -1,6 +1,5 @@
 import AuthenticatedLayout from "@/layouts/authenticated-layout";
-import { Head, useForm } from "@inertiajs/react";
-import { PageProps } from "@/types";
+import { Head } from "@inertiajs/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "@/components/data-table";
 import { columns, PasienType } from "./columns";

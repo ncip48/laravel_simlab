@@ -1,25 +1,24 @@
 import AuthenticatedLayout from "@/layouts/authenticated-layout";
-import { Head, useForm } from "@inertiajs/react";
-import { PageProps } from "@/types";
+import { Head } from "@inertiajs/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "@/components/data-table";
-import { columns, PasienType } from "./columns";
-import { AddPasien, DeletePasien, EditPasien } from "./form";
+import { AlatType, columns } from "./columns";
+import { AddAlat, DeleteAlat, EditAlat } from "./form";
 
-function TablePasien({ columns, data }: { columns: any; data: any }) {
+function TableAlat({ columns, data }: { columns: any; data: any }) {
     return (
         <DataTable
             columns={columns}
             data={data}
             search="name"
-            onDelete={(id) => <DeletePasien id={id} />}
-            onAdd={<AddPasien />}
-            onEdit={(dx) => <EditPasien item={dx} />}
+            onDelete={(id) => <DeleteAlat id={id} />}
+            onAdd={<AddAlat />}
+            onEdit={(dx) => <EditAlat item={dx} />}
         />
     );
 }
 
-export default function Pasien({ items }: { items: PasienType }) {
+export default function Alat({ items }: { items: AlatType }) {
     return (
         <AuthenticatedLayout header="Alat">
             <Head title="Alat" />
@@ -30,7 +29,7 @@ export default function Pasien({ items }: { items: PasienType }) {
                         <CardTitle>Alat</CardTitle>
                     </CardHeader>
                     <CardContent className="grid gap-4">
-                        <TablePasien columns={columns} data={items} />
+                        <TableAlat columns={columns} data={items} />
                     </CardContent>
                 </Card>
             </div>
