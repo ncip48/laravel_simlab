@@ -7,6 +7,7 @@ import {
 } from "react";
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogDescription,
     DialogFooter,
@@ -77,6 +78,11 @@ export const ModalAction = ({
                     </DialogHeader>
                     <div className="grid gap-4 py-4">{children}</div>
                     <DialogFooter>
+                        <DialogClose asChild>
+                            <Button type="button" variant="destructive">
+                                Tutup
+                            </Button>
+                        </DialogClose>
                         <FormButton processing={processing} />
                     </DialogFooter>
                 </form>
