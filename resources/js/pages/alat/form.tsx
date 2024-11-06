@@ -2,7 +2,7 @@ import { ModalAction } from "@/components/modal-action";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import React, { FormEventHandler, useEffect, useState } from "react";
-import { useForm } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
 import { InputError } from "@/components/ui/input-error";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import LoadingDots from "@/components/loading-dots";
 import { CogIcon, Trash2Icon } from "lucide-react";
 import { toasterForm } from "@/lib/utils";
 import { AlatType } from "./columns";
+import { PageProps } from "@/types";
 
 export function AddAlat() {
     const [open, setOpen] = useState(false);
@@ -176,6 +177,8 @@ type ParamType = {
 };
 
 export function ParameterAlat({ item }: { item: ParamType }) {
+    const { appUrl } = usePage<PageProps>().props;
+
     const [open, setOpen] = useState(false);
     const [parameters, setParameters] = useState<ParamType[]>([]);
     const [selectedParameters, setSelectedParameters] = useState<any[]>([]);
@@ -225,9 +228,7 @@ export function ParameterAlat({ item }: { item: ParamType }) {
     useEffect(() => {
         const fetchParameters = async () => {
             try {
-                const response = await fetch(
-                    `http://127.0.0.1:8000/alat/parameter/${item.id}`
-                );
+                const response = await fetch(`/alat/parameter/head/${item.id}`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch parameters");
                 }

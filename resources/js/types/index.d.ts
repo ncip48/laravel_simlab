@@ -15,6 +15,7 @@ export type PageProps<
         user: User;
     };
     appName: string;
+    appUrl: string;
 };
 
 export type MenuItemProp = {

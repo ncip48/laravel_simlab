@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlatController;
+use App\Http\Controllers\HasilPemeriksaanController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -23,8 +24,10 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('/pasien', PasienController::class);
     Route::resource('/alat', AlatController::class);
-    Route::get('/alat/parameter/{alat}', [AlatController::class, 'getParameter'])->name('alat.parameter');
+    Route::get('/alat/parameter/head/{alat}', [AlatController::class, 'getParameterHead'])->name('alat.parameter.head');
+    Route::get('/alat/parameter/content/{alat}', [AlatController::class, 'getParameterContent'])->name('alat.parameter.content');
     Route::patch('/alat/parameter/{alat}', [AlatController::class, 'setParameter'])->name('alat.set.parameter');
+    Route::get('/hasil-pemeriksaan', [HasilPemeriksaanController::class, 'index'])->name('hasil-pemeriksaan.index');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

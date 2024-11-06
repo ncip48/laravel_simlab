@@ -13,6 +13,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         Inertia::share('appName', config('app.name'));
+        Inertia::share('appUrl', config('app.url'));
     }
 
     /**
