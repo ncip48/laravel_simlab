@@ -79,7 +79,11 @@ export const ModalAction = ({
                     <div className="grid gap-4 py-4">{children}</div>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button type="button" variant="destructive">
+                            <Button
+                                type="button"
+                                variant="destructive"
+                                size="sm"
+                            >
                                 Tutup
                             </Button>
                         </DialogClose>
