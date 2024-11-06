@@ -24,7 +24,7 @@ export default function Pasien({ items }: { items: PasienType }) {
         <AuthenticatedLayout header="Dashboard">
             <Head title="Dashboard" />
 
-            <div className="container mx-auto p-4">
+            <div className="">
                 <Card>
                     <CardHeader>
                         <CardTitle>Pasien</CardTitle>

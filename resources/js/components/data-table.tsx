@@ -91,7 +91,7 @@ export function DataTable<TData, TValue>({
                                         </TableHead>
                                     );
                                 })}
-                                <TableHead>Action</TableHead>
+                                <TableHead>Aksi</TableHead>
                             </TableRow>
                         ))}
                     </TableHeader>
