@@ -115,7 +115,7 @@ export function EditAlat({ item }: { item: AlatType }) {
                 <Input
                     id="name"
                     className="mt-1 block w-full"
-                    value={data.name}
+                    value={data.name || ""}
                     onChange={(e) => setData("name", e.target.value)}
                     autoComplete="off"
                 />
@@ -129,7 +129,7 @@ export function EditAlat({ item }: { item: AlatType }) {
                     type="type"
                     id="folder"
                     className="mt-1 block w-full"
-                    value={data.folder}
+                    value={data.folder || ""}
                     onChange={(e) => {
                         setData("folder", e.target.value);
                     }}
@@ -172,17 +172,17 @@ export const DeleteAlat = ({ id }: { id: number }) => {
 type ParamType = {
     id: number;
     name: string;
-    parameter: any[];
+    parameter: string; // Array of objects with id and name properties
 };
 
 export function ParameterAlat({ item }: { item: ParamType }) {
     const [open, setOpen] = useState(false);
     const [parameters, setParameters] = useState<ParamType[]>([]);
-    const [selectedParameters, setSelectedParameters] = useState<string[]>([]);
+    const [selectedParameters, setSelectedParameters] = useState<any[]>([]);
     console.log(item);
     const { data, setData, patch, errors, processing, reset } = useForm({
         name: item.name,
-        send_param: item.parameter,
+        send_param: [] as any[],
     });
 
     // Handle checkbox change
@@ -196,7 +196,7 @@ export function ParameterAlat({ item }: { item: ParamType }) {
     };
 
     useEffect(() => {
-        setData({ send_param: selectedParameters });
+        setData({ send_param: selectedParameters, name: item.name });
     }, [selectedParameters]);
 
     const submit: FormEventHandler = (e) => {
