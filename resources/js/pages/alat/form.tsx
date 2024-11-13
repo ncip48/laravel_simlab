@@ -224,6 +224,11 @@ export function ParameterAlat({ item }: { item: ParamType }) {
         setParameters([]);
     };
 
+    useEffect(() => {
+        setSelectedParameters([]);
+        setParameters([]);
+    }, [open]);
+
     // Fetch parameters from the API when the component mounts or when 'item.id' changes
     useEffect(() => {
         const fetchParameters = async () => {

@@ -22,4 +22,21 @@ abstract class Controller
 
         return $contents;
     }
+
+    public function getParameterHead(string $id)
+    {
+        $device = Device::find($id);
+        $data = array_map('str_getcsv', file($device->folder));
+        $headers = collect($data[0]);
+
+        // Add id and name for each header item
+        $headersWithIds = $headers->map(function ($header, $index) {
+            return [
+                'id' => $index + 1,  // start id from 1 (index + 1)
+                'name' => $header
+            ];
+        });
+
+        return $headersWithIds;
+    }
 }
