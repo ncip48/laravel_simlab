@@ -57,6 +57,21 @@ const data = {
             url: "/hasil-pemeriksaan",
             icon: SquareActivity,
         },
+        {
+            title: "Screening",
+            url: "/screening",
+            icon: SquareActivity,
+            items: [
+                {
+                    title: "IMLTD",
+                    url: "/screening/imltd",
+                },
+                {
+                    title: "Antibody",
+                    url: "/screening/antibody",
+                },
+            ],
+        },
     ],
     navAlat: [
         {

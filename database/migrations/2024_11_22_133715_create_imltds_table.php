@@ -11,15 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('examinations', function (Blueprint $table) {
+        Schema::create('imltds', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('patient_id');
-            $table->foreign('patient_id')->references('id')->on('patients');
-            $table->tinyInteger('blood_type')->default(0);
-            $table->tinyInteger('rhesus')->default(0);
             $table->string('blood_bag');
+            $table->tinyInteger('hiv');
+            $table->integer('nilai_hiv');
+            $table->tinyInteger('hbsag');
+            $table->integer('nilai_hbsag');
+            $table->tinyInteger('hcv');
+            $table->integer('nilai_hcv');
+            $table->tinyInteger('tp');
+            $table->integer('nilai_tp');
             $table->timestamps();
             $table->softDeletes();
+            $table->integer('created_by');
         });
     }
 
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('examinations');
+        Schema::dropIfExists('imltds');
     }
 };
