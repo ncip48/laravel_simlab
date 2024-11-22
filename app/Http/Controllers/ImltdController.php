@@ -37,6 +37,20 @@ class ImltdController extends Controller
         //
     }
 
+    private function range_hiv($value)
+    {
+        $min = 20;
+        $max = 80;
+
+        if ($value >= $min && $value <= $max) {
+            return "NEGATIVE";
+        } elseif ($value > $max) {
+            return "POSITIF";
+        } else {
+            return "POSITIF";
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      */

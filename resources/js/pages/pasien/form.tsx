@@ -296,13 +296,13 @@ export function EditPasien({ item }: { item: PasienType }) {
     );
 }
 
-export const DeletePasien = ({ id }: { id: number }) => {
+export const DeleteImltd = ({ id }: { id: number }) => {
     const { delete: destroy, processing } = useForm();
 
     const deleteUser: FormEventHandler = (e) => {
         e.preventDefault();
 
-        destroy(route("pasien.destroy", id), {
+        destroy(route("imltd.destroy", id), {
             preserveScroll: true,
             // onSuccess: () => closeModal(),
             onError: () => toasterForm({ success: false, message: "Error" }),

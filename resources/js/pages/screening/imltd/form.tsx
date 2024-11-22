@@ -308,7 +308,7 @@ export function EditImltd({ item }: { item: ImltdType }) {
                     <Input
                         id="nilai_hcv"
                         className="mt-1 block w-full"
-                        value={data.hcv}
+                        value={data.nilai_hcv}
                         placeholder="Nilai (titer AB)"
                         onChange={(e) => setData("nilai_hcv", e.target.value)}
                         autoComplete="off"
