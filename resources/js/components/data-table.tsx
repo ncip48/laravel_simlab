@@ -37,7 +37,7 @@ interface DataTableProps<TData extends { id: number }, TValue> {
     onDelete: (id: number) => React.ReactNode;
     onAdd: React.ReactNode;
     onEdit: (item: any) => React.ReactNode;
-    leftAction?: (item: TData) => React.ReactNode;
+    leftAction?: (item: any) => React.ReactNode;
 }
 
 export function DataTable<TData extends { id: number }, TValue>({
