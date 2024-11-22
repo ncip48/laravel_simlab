@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlatController;
 use App\Http\Controllers\HasilPemeriksaanController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\PemeriksaanController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('/pasien', PasienController::class);
+    Route::resource('/pemeriksaan', PemeriksaanController::class);
     Route::resource('/alat', AlatController::class);
     Route::get('/alat/parameter/head/{alat}', [AlatController::class, 'getParameterHead'])->name('alat.parameter.head');
     Route::get('/alat/parameter/content/{alat}', [AlatController::class, 'getParameterContent'])->name('alat.parameter.content');

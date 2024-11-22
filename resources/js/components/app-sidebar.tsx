@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import {
+    Activity,
     Command,
     Database,
     Frame,
@@ -45,6 +46,11 @@ const data = {
             title: "Data Pasien",
             url: "/pasien",
             icon: Speech,
+        },
+        {
+            title: "Pemeriksaan",
+            url: "/pemeriksaan",
+            icon: Activity,
         },
         {
             title: "Hasil Pemeriksaan",

@@ -9,5 +9,5 @@ class Patient extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['name', 'address'];
+    protected $fillable = ['name', 'address', 'province_id', 'regency_id', 'district_id', 'village_id', 'identity_number', 'post_code', 'gender', 'birth_place_id', 'birth_date'];
 }

@@ -34,10 +34,18 @@ class PasienController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'identity_number' => 'required',
             'address' => 'required',
+            'gender' => 'required',
+            'post_code' => 'required',
+            'birth_date' => 'required',
         ], [
             'name.required' => 'Nama tidak boleh kosong',
+            'identity_number.required' => 'NIK tidak boleh kosong',
             'address.required' => 'Alamat tidak boleh kosong',
+            'gender.required' => 'Jenis kelamin harus dipilih',
+            'post_code.required' => 'Kode pos tidak boleh kosong',
+            'birth_date.required' => 'Tanggal lahir tidak boleh kosong',
         ]);
 
         Patient::create($request->all());
@@ -66,10 +74,18 @@ class PasienController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'identity_number' => 'required',
             'address' => 'required',
+            'gender' => 'required',
+            'post_code' => 'required',
+            'birth_date' => 'required',
         ], [
             'name.required' => 'Nama tidak boleh kosong',
+            'identity_number.required' => 'NIK tidak boleh kosong',
             'address.required' => 'Alamat tidak boleh kosong',
+            'gender.required' => 'Jenis kelamin harus dipilih',
+            'post_code.required' => 'Kode pos tidak boleh kosong',
+            'birth_date.required' => 'Tanggal lahir tidak boleh kosong',
         ]);
 
         Patient::where('id', $id)->update($request->all());
