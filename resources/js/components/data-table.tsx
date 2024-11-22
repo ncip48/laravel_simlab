@@ -88,7 +88,9 @@ export function DataTable<TData extends { id: number }, TValue>({
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
                                 {/* Render parent headers */}
-                                <TableHead rowSpan={2}>#</TableHead>
+                                <TableHead rowSpan={2} className="border">
+                                    #
+                                </TableHead>
                                 {headerGroup.headers.map((header) => {
                                     const columnDef = header.column
                                         .columnDef as ExtendedColumnDef<
@@ -102,7 +104,7 @@ export function DataTable<TData extends { id: number }, TValue>({
                                                 colSpan={
                                                     columnDef.childs.length
                                                 }
-                                                className="text-center"
+                                                className="text-center border"
                                             >
                                                 {flexRender(
                                                     columnDef.header,
@@ -118,6 +120,7 @@ export function DataTable<TData extends { id: number }, TValue>({
                                             <TableHead
                                                 key={header.id}
                                                 rowSpan={2}
+                                                className="border"
                                             >
                                                 {typeof columnDef.header ===
                                                 "function"
@@ -132,7 +135,9 @@ export function DataTable<TData extends { id: number }, TValue>({
                                         );
                                     }
                                 })}
-                                <TableHead rowSpan={2}>Aksi</TableHead>
+                                <TableHead rowSpan={2} className="border">
+                                    Aksi
+                                </TableHead>
                             </TableRow>
                         ))}
 
@@ -142,7 +147,10 @@ export function DataTable<TData extends { id: number }, TValue>({
                                 .filter((column) => column.childs)
                                 .flatMap((column) =>
                                     column.childs!.map((child) => (
-                                        <TableHead key={child.accessorKey}>
+                                        <TableHead
+                                            key={child.accessorKey}
+                                            className="border"
+                                        >
                                             {child.header as any}
                                         </TableHead>
                                     ))
@@ -160,7 +168,9 @@ export function DataTable<TData extends { id: number }, TValue>({
                                     }
                                 >
                                     {/* Render the row index */}
-                                    <TableCell>{idx + 1}</TableCell>
+                                    <TableCell className="border">
+                                        {idx + 1}
+                                    </TableCell>
 
                                     {/* Render cells */}
                                     {columns.map((column) => {
@@ -170,7 +180,7 @@ export function DataTable<TData extends { id: number }, TValue>({
                                                 (child) => (
                                                     <TableCell
                                                         key={`${column.accessorKey}-${child.accessorKey}`}
-                                                        className="text-center"
+                                                        className="text-center border"
                                                     >
                                                         {
                                                             (
@@ -188,6 +198,7 @@ export function DataTable<TData extends { id: number }, TValue>({
                                             return (
                                                 <TableCell
                                                     key={column.accessorKey}
+                                                    className="border"
                                                 >
                                                     {
                                                         (
