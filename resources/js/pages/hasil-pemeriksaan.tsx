@@ -54,7 +54,7 @@ export default function HasilPemeriksaan({
         });
 
     const handleSearch = () => {
-        get(route("hasil-pemeriksaan.search"), data);
+        get(route("hasil-pemeriksaan.search"), {});
     };
 
     // console.log(data.tanggal);
