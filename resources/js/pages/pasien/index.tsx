@@ -1,9 +1,11 @@
 import AuthenticatedLayout from "@/layouts/authenticated-layout";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "@/components/data-table";
 import { columns, PasienType } from "./columns";
 import { AddPasien, DeletePasien, EditPasien } from "./form";
+import { Button } from "@/components/ui/button";
+import { ActivitySquareIcon } from "lucide-react";
 
 function TablePasien({ columns, data }: { columns: any; data: any }) {
     return (
@@ -14,6 +16,15 @@ function TablePasien({ columns, data }: { columns: any; data: any }) {
             onDelete={(id) => <DeletePasien id={id} />}
             onAdd={<AddPasien />}
             onEdit={(dx) => <EditPasien item={dx} />}
+            leftAction={(dx) => {
+                return (
+                    <Link href={`pemeriksaan/${dx.id}`}>
+                        <Button size="sm" variant="secondary">
+                            <ActivitySquareIcon />
+                        </Button>
+                    </Link>
+                );
+            }}
         />
     );
 }
