@@ -204,6 +204,8 @@ export function EditImltd({ item }: { item: ImltdType }) {
         nilai_tp: item.nilai_tp,
     });
 
+    console.log(data);
+
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
@@ -235,7 +237,7 @@ export function EditImltd({ item }: { item: ImltdType }) {
                 <Input
                     id="blood_bag"
                     className="mt-1 block w-full"
-                    value={data.blood_bag}
+                    defaultValue={item.blood_bag}
                     onChange={(e) => setData("blood_bag", e.target.value)}
                     autoComplete="off"
                 />
@@ -258,7 +260,7 @@ export function EditImltd({ item }: { item: ImltdType }) {
                     <Input
                         id="nilai_hiv"
                         className="mt-1 block w-full"
-                        value={data.nilai_hiv}
+                        defaultValue={item.nilai_hiv}
                         placeholder="Nilai (titer AB)"
                         onChange={(e) => setData("nilai_hiv", e.target.value)}
                         autoComplete="off"
@@ -283,7 +285,7 @@ export function EditImltd({ item }: { item: ImltdType }) {
                     <Input
                         id="nilai_hbsag"
                         className="mt-1 block w-full"
-                        value={data.nilai_hbsag}
+                        defaultValue={item.nilai_hbsag}
                         placeholder="Nilai (titer AB)"
                         onChange={(e) => setData("nilai_hbsag", e.target.value)}
                         autoComplete="off"
@@ -308,7 +310,7 @@ export function EditImltd({ item }: { item: ImltdType }) {
                     <Input
                         id="nilai_hcv"
                         className="mt-1 block w-full"
-                        value={data.nilai_hcv}
+                        defaultValue={item.nilai_hcv}
                         placeholder="Nilai (titer AB)"
                         onChange={(e) => setData("nilai_hcv", e.target.value)}
                         autoComplete="off"
@@ -333,7 +335,7 @@ export function EditImltd({ item }: { item: ImltdType }) {
                     <Input
                         id="nilai_tp"
                         className="mt-1 block w-full"
-                        value={data.nilai_tp}
+                        defaultValue={item.nilai_tp}
                         placeholder="Nilai (titer AB)"
                         onChange={(e) => setData("nilai_tp", e.target.value)}
                         autoComplete="off"
