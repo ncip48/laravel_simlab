@@ -182,7 +182,7 @@ export function ParameterAlat({ item }: { item: ParamType }) {
     const [open, setOpen] = useState(false);
     const [parameters, setParameters] = useState<ParamType[]>([]);
     const [selectedParameters, setSelectedParameters] = useState<any[]>([]);
-    console.log(item);
+    // console.log(item);
     const { data, setData, patch, errors, processing, reset } = useForm({
         name: item.name,
         send_param: [] as any[],
@@ -205,8 +205,8 @@ export function ParameterAlat({ item }: { item: ParamType }) {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        console.log("Submitting with selected parameters:", selectedParameters);
-        console.log("Route:", route("alat.update", item.id));
+        // console.log("Submitting with selected parameters:", selectedParameters);
+        // console.log("Route:", route("alat.update", item.id));
 
         patch(route("alat.set.parameter", item.id), {
             preserveScroll: true,

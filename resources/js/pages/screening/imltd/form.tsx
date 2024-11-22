@@ -204,7 +204,7 @@ export function EditImltd({ item }: { item: ImltdType }) {
         nilai_tp: item.nilai_tp,
     });
 
-    console.log(data);
+    // console.log(data);
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();

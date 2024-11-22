@@ -31,7 +31,7 @@ export function SelectOption({
                     <SelectLabel>{title}</SelectLabel>
                     {items.map((item, index) => {
                         return (
-                            <SelectItem value={item.value}>
+                            <SelectItem value={item.value} key={index}>
                                 {item.label}
                             </SelectItem>
                         );
