@@ -47,14 +47,14 @@ export default function HasilPemeriksaan({
     const alat = props.alat || ""; // default to an empty string if not present
     const tanggal = props.tanggal || moment().format("YYYY-MM-DD"); // default to an empty string if not present
     // console.log(alat, tanggal, props);
-    const { data, setData, get, errors, processing, recentlySuccessful } =
+    const { data, setData, post, errors, processing, recentlySuccessful } =
         useForm({
             alat, // Initial value for alat
             tanggal, // Initial value for tanggal
         });
 
     const handleSearch = () => {
-        get(route("hasil-pemeriksaan.search"), {});
+        post(route("hasil-pemeriksaan.search"), {});
     };
 
     // console.log(data.tanggal);

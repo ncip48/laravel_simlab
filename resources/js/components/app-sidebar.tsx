@@ -8,6 +8,7 @@ import {
     Frame,
     Home,
     LifeBuoy,
+    MonitorCheck,
     Send,
     Speech,
     SquareActivity,
@@ -60,7 +61,7 @@ const data = {
         {
             title: "Screening",
             url: "/screening",
-            icon: SquareActivity,
+            icon: MonitorCheck,
             items: [
                 {
                     title: "IMLTD",

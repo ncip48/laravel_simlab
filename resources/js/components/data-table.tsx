@@ -149,7 +149,7 @@ export function DataTable<TData extends { id: number }, TValue>({
                                     column.childs!.map((child) => (
                                         <TableHead
                                             key={child.accessorKey}
-                                            className="border"
+                                            className="border text-center"
                                         >
                                             {child.header as any}
                                         </TableHead>

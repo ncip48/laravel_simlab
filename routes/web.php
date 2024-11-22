@@ -34,7 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/alat/parameter/content/{alat}', [AlatController::class, 'getParameterContent'])->name('alat.parameter.content');
     Route::patch('/alat/parameter/{alat}', [AlatController::class, 'setParameter'])->name('alat.set.parameter');
     Route::get('/hasil-pemeriksaan', [HasilPemeriksaanController::class, 'index'])->name('hasil-pemeriksaan.index');
-    Route::get('/hasil-pemeriksaan/search', [HasilPemeriksaanController::class, 'search'])->name('hasil-pemeriksaan.search');
+    Route::post('/hasil-pemeriksaan', [HasilPemeriksaanController::class, 'search'])->name('hasil-pemeriksaan.search');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
