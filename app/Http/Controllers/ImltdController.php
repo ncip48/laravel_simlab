@@ -17,10 +17,14 @@ class ImltdController extends Controller
     {
         $items = Imltd::all();
         $items = $items->map(function ($item) {
-            $item->hiv_string = $item->hiv ? "Positif ($item->nilai_hiv)" : "Negatif ($item->nilai_hiv)";
-            $item->hbsag_string = $item->hbsag ? "Positif ($item->nilai_hbsag)" : "Negatif ($item->nilai_hbsag)";
-            $item->hcv_string = $item->hcv ? "Positif ($item->nilai_hcv)" : "Negatif ($item->nilai_hcv)";
-            $item->tp_string = $item->tp ? "Positif ($item->nilai_tp)" : "Negatif ($item->nilai_tp)";
+            // $item->hiv_string = $item->hiv ? "Positif ($item->nilai_hiv)" : "Negatif ($item->nilai_hiv)";
+            // $item->hbsag_string = $item->hbsag ? "Positif ($item->nilai_hbsag)" : "Negatif ($item->nilai_hbsag)";
+            // $item->hcv_string = $item->hcv ? "Positif ($item->nilai_hcv)" : "Negatif ($item->nilai_hcv)";
+            // $item->tp_string = $item->tp ? "Positif ($item->nilai_tp)" : "Negatif ($item->nilai_tp)";
+            $item->hiv_string = $item->hiv ? "Positif" : "Negatif";
+            $item->hbsag_string = $item->hbsag ? "Positif" : "Negatif";
+            $item->hcv_string = $item->hcv ? "Positif" : "Negatif";
+            $item->tp_string = $item->tp ? "Positif" : "Negatif";
             $item->pemeriksa = User::where('id', $item->created_by)->first()->name;
             return $item;
         });

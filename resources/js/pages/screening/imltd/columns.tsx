@@ -23,20 +23,36 @@ export const columns: ColumnDef<ImltdType>[] = [
         header: "No Kantong",
     },
     {
-        accessorKey: "hiv_string",
+        accessorKey: "#",
         header: "HIV",
+        childs: [
+            { accessorKey: "hiv_string", header: "Result" },
+            { accessorKey: "nilai_hiv", header: "Nilai (titer AB)" },
+        ],
     },
     {
-        accessorKey: "hbsag_string",
+        accessorKey: "hbsag",
         header: "HbSAg",
+        childs: [
+            { accessorKey: "hbsag_string", header: "Result" },
+            { accessorKey: "nilai_hbsag", header: "Nilai (titer AB)" },
+        ],
     },
     {
-        accessorKey: "hcv_string",
+        accessorKey: "hcv",
         header: "HCV",
+        childs: [
+            { accessorKey: "hcv_string", header: "Result" },
+            { accessorKey: "nilai_hcv", header: "Nilai (titer AB)" },
+        ],
     },
     {
-        accessorKey: "tp_string",
+        accessorKey: "tp",
         header: "TP",
+        childs: [
+            { accessorKey: "tp_string", header: "Result" },
+            { accessorKey: "nilai_tp", header: "Nilai (titer AB)" },
+        ],
     },
     {
         accessorKey: "pemeriksa",

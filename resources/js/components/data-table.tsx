@@ -7,6 +7,7 @@ import {
     getCoreRowModel,
     getFilteredRowModel,
     getPaginationRowModel,
+    HeaderContext,
     useReactTable,
 } from "@tanstack/react-table";
 
@@ -22,17 +23,24 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React from "react";
 
-interface DataTableProps<TData, TValue> {
-    columns: ColumnDef<TData, TValue>[];
+// Extend the ColumnDef interface to include the 'childs' and 'accessorKey' properties
+interface ExtendedColumnDef<TData, TValue>
+    extends Omit<ColumnDef<TData, TValue>, "childs"> {
+    accessorKey: string;
+    childs?: ExtendedColumnDef<TData, TValue>[];
+}
+
+interface DataTableProps<TData extends { id: number }, TValue> {
+    columns: ExtendedColumnDef<TData, TValue>[];
     data: TData[];
     search: string;
     onDelete: (id: number) => React.ReactNode;
     onAdd: React.ReactNode;
-    onEdit: (item: any) => React.ReactNode;
-    leftAction?: (item: any) => React.ReactNode;
+    onEdit: (item: TData) => React.ReactNode;
+    leftAction?: (item: TData) => React.ReactNode;
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends { id: number }, TValue>({
     columns,
     data,
     search,
@@ -46,7 +54,7 @@ export function DataTable<TData, TValue>({
 
     const table = useReactTable({
         data,
-        columns,
+        columns: columns as ColumnDef<TData, any>[],
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         onColumnFiltersChange: setColumnFilters,
@@ -79,24 +87,69 @@ export function DataTable<TData, TValue>({
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
-                                <TableHead>#</TableHead>
+                                {/* Render parent headers */}
+                                <TableHead rowSpan={2}>#</TableHead>
                                 {headerGroup.headers.map((header) => {
-                                    return (
-                                        <TableHead key={header.id}>
-                                            {header.isPlaceholder
-                                                ? null
-                                                : flexRender(
-                                                      header.column.columnDef
-                                                          .header,
-                                                      header.getContext()
-                                                  )}
-                                        </TableHead>
-                                    );
+                                    const columnDef = header.column
+                                        .columnDef as ExtendedColumnDef<
+                                        TData,
+                                        TValue
+                                    >;
+                                    if (columnDef.childs) {
+                                        return (
+                                            <TableHead
+                                                key={header.id}
+                                                colSpan={
+                                                    columnDef.childs.length
+                                                }
+                                                className="text-center"
+                                            >
+                                                {flexRender(
+                                                    columnDef.header,
+                                                    header.getContext() as HeaderContext<
+                                                        TData,
+                                                        TValue
+                                                    >
+                                                )}
+                                            </TableHead>
+                                        );
+                                    } else {
+                                        return (
+                                            <TableHead
+                                                key={header.id}
+                                                rowSpan={2}
+                                            >
+                                                {typeof columnDef.header ===
+                                                "function"
+                                                    ? columnDef.header(
+                                                          header.getContext() as HeaderContext<
+                                                              TData,
+                                                              TValue
+                                                          >
+                                                      )
+                                                    : columnDef.header}
+                                            </TableHead>
+                                        );
+                                    }
                                 })}
-                                <TableHead>Aksi</TableHead>
+                                <TableHead rowSpan={2}>Aksi</TableHead>
                             </TableRow>
                         ))}
+
+                        {/* Render child headers */}
+                        <TableRow>
+                            {columns
+                                .filter((column) => column.childs)
+                                .flatMap((column) =>
+                                    column.childs!.map((child) => (
+                                        <TableHead key={child.accessorKey}>
+                                            {child.header as any}
+                                        </TableHead>
+                                    ))
+                                )}
+                        </TableRow>
                     </TableHeader>
+
                     <TableBody>
                         {table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row, idx) => (
@@ -106,26 +159,50 @@ export function DataTable<TData, TValue>({
                                         row.getIsSelected() && "selected"
                                     }
                                 >
+                                    {/* Render the row index */}
                                     <TableCell>{idx + 1}</TableCell>
-                                    {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>
-                                            {flexRender(
-                                                cell.column.columnDef.cell,
-                                                cell.getContext()
-                                            )}
-                                        </TableCell>
-                                    ))}
-                                    {/* <TableCell>
-                      {row.original.image && (
-                        <Image
-                          src={`/public/assets/img/brands/${row.original.image}`}
-                          width={50}
-                          height={50}
-                          alt="Image"
-                          className="w-10 h-10"
-                        />
-                      )}
-                    </TableCell> */}
+
+                                    {/* Render cells */}
+                                    {columns.map((column) => {
+                                        if (column.childs) {
+                                            // Render each child as a separate <td>
+                                            return column.childs.map(
+                                                (child) => (
+                                                    <TableCell
+                                                        key={`${column.accessorKey}-${child.accessorKey}`}
+                                                        className="text-center"
+                                                    >
+                                                        {
+                                                            (
+                                                                row.original as Record<
+                                                                    string,
+                                                                    any
+                                                                >
+                                                            )[child.accessorKey]
+                                                        }
+                                                    </TableCell>
+                                                )
+                                            );
+                                        } else {
+                                            // Render regular column values
+                                            return (
+                                                <TableCell
+                                                    key={column.accessorKey}
+                                                >
+                                                    {
+                                                        (
+                                                            row.original as Record<
+                                                                string,
+                                                                any
+                                                            >
+                                                        )[column.accessorKey]
+                                                    }
+                                                </TableCell>
+                                            );
+                                        }
+                                    })}
+
+                                    {/* Render action buttons */}
                                     <TableCell className="flex gap-1">
                                         {leftAction &&
                                             leftAction(data[Number(row.id)])}
@@ -137,7 +214,7 @@ export function DataTable<TData, TValue>({
                         ) : (
                             <TableRow>
                                 <TableCell
-                                    colSpan={columns.length + 2}
+                                    colSpan={columns.length + 2} // Adjust for index and action columns
                                     className="h-24 text-center"
                                 >
                                     Tidak ada data.

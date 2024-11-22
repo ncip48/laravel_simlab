@@ -37,6 +37,9 @@ export function NavMain({
     title: string;
 }) {
     const { pathname } = window.location;
+    const isActive = (url: string) => {
+        return pathname.split("/")[1] === url.replace("/", "");
+    };
 
     return (
         <SidebarGroup>
@@ -47,12 +50,15 @@ export function NavMain({
                         <Collapsible
                             key={item.title}
                             asChild
-                            defaultOpen={item.isActive}
+                            defaultOpen={isActive(item.url)}
                             className="group/collapsible"
                         >
                             <SidebarMenuItem>
                                 <CollapsibleTrigger asChild>
-                                    <SidebarMenuButton tooltip={item.title}>
+                                    <SidebarMenuButton
+                                        tooltip={item.title}
+                                        isActive={isActive(item.url)}
+                                    >
                                         {item.icon && <item.icon />}
                                         <span>{item.title}</span>
                                         <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
@@ -66,7 +72,14 @@ export function NavMain({
                                             >
                                                 <SidebarMenuSubButton asChild>
                                                     <Link href={subItem.url}>
-                                                        <span>
+                                                        <span
+                                                            className={
+                                                                pathname ===
+                                                                subItem.url
+                                                                    ? "font-bold"
+                                                                    : ""
+                                                            }
+                                                        >
                                                             {subItem.title}
                                                         </span>
                                                     </Link>

@@ -3,8 +3,7 @@ import { Head } from "@inertiajs/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "@/components/data-table";
 import { columns, ImltdType } from "./columns";
-import { AddImltd, EditImltd } from "./form";
-import { DeleteImltd } from "@/pages/pasien/form";
+import { AddImltd, EditImltd, DeleteImltd } from "./form";
 
 function TableImltd({ columns, data }: { columns: any; data: any }) {
     return (
