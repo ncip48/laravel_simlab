@@ -116,7 +116,7 @@ export function EditAlat({ item }: { item: AlatType }) {
                 <Input
                     id="name"
                     className="mt-1 block w-full"
-                    value={data.name || ""}
+                    defaultValue={item.name || ""}
                     onChange={(e) => setData("name", e.target.value)}
                     autoComplete="off"
                 />
@@ -130,7 +130,7 @@ export function EditAlat({ item }: { item: AlatType }) {
                     type="type"
                     id="folder"
                     className="mt-1 block w-full"
-                    value={data.folder || ""}
+                    defaultValue={item.folder || ""}
                     onChange={(e) => {
                         setData("folder", e.target.value);
                     }}

@@ -36,7 +36,7 @@ interface DataTableProps<TData extends { id: number }, TValue> {
     search: string;
     onDelete: (id: number) => React.ReactNode;
     onAdd: React.ReactNode;
-    onEdit: (item: TData) => React.ReactNode;
+    onEdit: (item: any) => React.ReactNode;
     leftAction?: (item: TData) => React.ReactNode;
 }
 

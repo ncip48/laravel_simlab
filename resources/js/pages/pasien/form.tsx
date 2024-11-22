@@ -222,7 +222,7 @@ export function EditPasien({ item }: { item: PasienType }) {
                 <Input
                     id="nik"
                     className="mt-1 block w-full"
-                    defaultValue={item.identity_number}
+                    defaultValue={item.identity_number || ""}
                     onChange={(e) => setData("identity_number", e.target.value)}
                     autoComplete="off"
                 />
@@ -235,7 +235,7 @@ export function EditPasien({ item }: { item: PasienType }) {
                 <Input
                     id="name"
                     className="mt-1 block w-full"
-                    defaultValue={item.name}
+                    defaultValue={item.name || ""}
                     onChange={(e) => setData("name", e.target.value)}
                     autoComplete="name"
                 />
@@ -248,7 +248,7 @@ export function EditPasien({ item }: { item: PasienType }) {
                 <Input
                     id="post_code"
                     className="mt-1 block w-full"
-                    defaultValue={item.post_code}
+                    defaultValue={item.post_code || ""}
                     onChange={(e) => setData("post_code", e.target.value)}
                     autoComplete="off"
                 />
@@ -272,7 +272,7 @@ export function EditPasien({ item }: { item: PasienType }) {
                     type="date"
                     id="date"
                     className="mt-1 block w-full"
-                    defaultValue={item.birth_date}
+                    defaultValue={item.birth_date || ""}
                     onChange={(e) => setData("birth_date", e.target.value)}
                     autoComplete="off"
                 />
@@ -285,7 +285,7 @@ export function EditPasien({ item }: { item: PasienType }) {
                 <Textarea
                     id="address"
                     className="mt-1 block w-full"
-                    defaultValue={item.address}
+                    defaultValue={item.address || ""}
                     onChange={(e) => setData("address", e.target.value)}
                     autoComplete="address"
                 />

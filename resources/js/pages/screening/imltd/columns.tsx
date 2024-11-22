@@ -17,7 +17,13 @@ export type ImltdType = {
     nilai_tp: string;
 };
 
-export const columns: ColumnDef<ImltdType>[] = [
+interface ExtendedColumnDef<TData, TValue>
+    extends Omit<ColumnDef<TData, TValue>, "childs"> {
+    accessorKey: string;
+    childs?: ExtendedColumnDef<TData, TValue>[];
+}
+
+export const columns: ExtendedColumnDef<ImltdType, any>[] = [
     {
         accessorKey: "blood_bag",
         header: "No Kantong",
