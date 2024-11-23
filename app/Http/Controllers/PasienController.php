@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\Patient;
+use App\Models\Province;
+use App\Models\Regency;
+use App\Models\Village;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -14,8 +19,34 @@ class PasienController extends Controller
      */
     public function index()
     {
+        $items = Patient::all();
+        $items = $items->map(function ($item) {
+            $item->jk_string = $item->jk_string();
+            $province = $item->province->name ?? '';
+            $regency = $item->regency->name ?? '';
+            $district = $item->district->name ?? '';
+            $village = $item->village->name ?? '';
+            $item->address_full = "$item->address, $village, $district, $regency, Provinsi $province, $item->post_code";
+            if ($item->birth_date) {
+                $birthDate = Carbon::parse($item->birth_date);
+                $now = Carbon::now();
+
+                $years = floor($birthDate->diffInYears($now)); // Get complete years
+                $months = floor($birthDate->copy()->addYears($years)->diffInMonths($now)); // Get remaining months
+
+                // Format age as "X year(s) Y month(s)"
+                if ($years > 0) {
+                    $item->age = "{$years} tahun" . ($months > 0 ? " {$months} bulan" : "");
+                } else {
+                    $item->age = "{$months} bulan";
+                }
+            } else {
+                $item->age = null; // No age if birth_date is missing
+            }
+            return $item;
+        });
         return Inertia::render('pasien/index', [
-            'items' => Patient::all(),
+            'items' => $items,
         ]);
     }
 

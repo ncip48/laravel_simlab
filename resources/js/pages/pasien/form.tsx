@@ -145,11 +145,12 @@ export function AddPasien() {
                     items={JK}
                     value=""
                     onChange={(e) => setData("gender", e)}
+                    wFull
                 />
                 <InputError className="mt-1" message={errors.gender} />
             </div>
             <div>
-                <Label htmlFor="name">Birth Date</Label>
+                <Label htmlFor="name">Tanggal Lahir</Label>
 
                 <Input
                     type="date"
@@ -262,11 +263,12 @@ export function EditPasien({ item }: { item: PasienType }) {
                     items={JK}
                     value={item.gender}
                     onChange={(e) => setData("gender", e)}
+                    wFull
                 />
                 <InputError className="mt-1" message={errors.gender} />
             </div>
             <div>
-                <Label htmlFor="name">Birth Date</Label>
+                <Label htmlFor="name">Tanggal Lahir</Label>
 
                 <Input
                     type="date"

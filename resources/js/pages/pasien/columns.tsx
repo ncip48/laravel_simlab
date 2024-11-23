@@ -25,7 +25,7 @@ export const columns: ColumnDef<PasienType>[] = [
         header: "Nama",
     },
     {
-        accessorKey: "gender",
+        accessorKey: "jk_string",
         header: "Jenis Kelamin",
     },
     {
@@ -33,7 +33,11 @@ export const columns: ColumnDef<PasienType>[] = [
         header: "Tgl Lahir",
     },
     {
-        accessorKey: "address",
+        accessorKey: "age",
+        header: "Usia",
+    },
+    {
+        accessorKey: "address_full",
         header: "Alamat",
     },
 ];
