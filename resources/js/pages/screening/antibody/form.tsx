@@ -38,10 +38,10 @@ export function AddAntibody() {
         reset,
     } = useForm({
         blood_bag: "",
-        p1: "",
-        p2: "",
-        p3: "",
-        p4: "",
+        p1: "0",
+        p2: "0",
+        p3: "0",
+        p4: "0",
     });
 
     const submit: FormEventHandler = (e) => {
@@ -134,14 +134,10 @@ export function EditAntibody({ item }: { item: AntibodyType }) {
     const [open, setOpen] = useState(false);
     const { data, setData, patch, errors, processing, reset } = useForm({
         blood_bag: item.blood_bag,
-        hiv: item.hiv,
-        nilai_hiv: item.nilai_hiv,
-        hbsag: item.hbsag,
-        nilai_hbsag: item.nilai_hbsag,
-        hcv: item.hcv,
-        nilai_hcv: item.nilai_hcv,
-        tp: item.tp,
-        nilai_tp: item.nilai_tp,
+        p1: item.p1,
+        p2: item.p2,
+        p3: item.p3,
+        p4: item.p4,
     });
 
     // console.log(data);
@@ -149,7 +145,7 @@ export function EditAntibody({ item }: { item: AntibodyType }) {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        patch(route("imltd.update", item.id), {
+        patch(route("antibody.update", item.id), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
             onFinish: () => reset(),
@@ -165,9 +161,9 @@ export function EditAntibody({ item }: { item: AntibodyType }) {
         <ModalAction
             submit={submit}
             processing={processing}
-            title="Edit Imltd"
+            title="Edit Antibody"
             isEdit
-            description="Edit imltd disini."
+            description="Edit antibody disini."
             open={open}
             setOpen={setOpen}
         >
@@ -184,105 +180,49 @@ export function EditAntibody({ item }: { item: AntibodyType }) {
 
                 <InputError className="mt-1" message={errors.blood_bag} />
             </div>
-            <div className="flex gap-3 items-end">
-                <div>
-                    <Label htmlFor="name">HIV</Label>
-                    <SelectOption
-                        title="Pilih Result"
-                        items={Result}
-                        value={String(data.hiv)}
-                        onChange={(e) => setData("hiv", e)}
-                    />
+            <div>
+                <Label htmlFor="name">P1</Label>
+                <SelectOption
+                    items={Result}
+                    value={String(data.p1)}
+                    onChange={(e) => setData("p1", e)}
+                    wFull
+                />
 
-                    <InputError className="mt-1" message={errors.hiv} />
-                </div>
-                <div>
-                    <Input
-                        id="nilai_hiv"
-                        className="mt-1 block w-full"
-                        defaultValue={item.nilai_hiv}
-                        placeholder="Nilai (titer AB)"
-                        onChange={(e) => setData("nilai_hiv", e.target.value)}
-                        autoComplete="off"
-                    />
-
-                    <InputError className="mt-1" message={errors.nilai_hiv} />
-                </div>
+                <InputError className="mt-1" message={errors.p1} />
             </div>
-            <div className="flex gap-3 items-end">
-                <div>
-                    <Label htmlFor="name">HbsAg</Label>
-                    <SelectOption
-                        title="Pilih Result"
-                        items={Result}
-                        value={String(data.hbsag)}
-                        onChange={(e) => setData("hbsag", e)}
-                    />
+            <div>
+                <Label htmlFor="name">P2</Label>
+                <SelectOption
+                    items={Result}
+                    value={String(data.p2)}
+                    onChange={(e) => setData("p2", e)}
+                    wFull
+                />
 
-                    <InputError className="mt-1" message={errors.hbsag} />
-                </div>
-                <div>
-                    <Input
-                        id="nilai_hbsag"
-                        className="mt-1 block w-full"
-                        defaultValue={item.nilai_hbsag}
-                        placeholder="Nilai (titer AB)"
-                        onChange={(e) => setData("nilai_hbsag", e.target.value)}
-                        autoComplete="off"
-                    />
-
-                    <InputError className="mt-1" message={errors.nilai_hbsag} />
-                </div>
+                <InputError className="mt-1" message={errors.p2} />
             </div>
-            <div className="flex gap-3 items-end">
-                <div>
-                    <Label htmlFor="name">HCV</Label>
-                    <SelectOption
-                        title="Pilih Result"
-                        items={Result}
-                        value={String(data.hcv)}
-                        onChange={(e) => setData("hcv", e)}
-                    />
+            <div>
+                <Label htmlFor="name">P3</Label>
+                <SelectOption
+                    items={Result}
+                    value={String(data.p3)}
+                    onChange={(e) => setData("p3", e)}
+                    wFull
+                />
 
-                    <InputError className="mt-1" message={errors.hcv} />
-                </div>
-                <div>
-                    <Input
-                        id="nilai_hcv"
-                        className="mt-1 block w-full"
-                        defaultValue={item.nilai_hcv}
-                        placeholder="Nilai (titer AB)"
-                        onChange={(e) => setData("nilai_hcv", e.target.value)}
-                        autoComplete="off"
-                    />
-
-                    <InputError className="mt-1" message={errors.nilai_hcv} />
-                </div>
+                <InputError className="mt-1" message={errors.p3} />
             </div>
-            <div className="flex gap-3 items-end">
-                <div>
-                    <Label htmlFor="name">TP</Label>
-                    <SelectOption
-                        title="Pilih Result"
-                        items={Result}
-                        value={String(data.tp)}
-                        onChange={(e) => setData("tp", e)}
-                    />
+            <div>
+                <Label htmlFor="name">P4</Label>
+                <SelectOption
+                    items={Result}
+                    value={String(data.p4)}
+                    onChange={(e) => setData("p4", e)}
+                    wFull
+                />
 
-                    <InputError className="mt-1" message={errors.tp} />
-                </div>
-                <div>
-                    <Input
-                        id="nilai_tp"
-                        className="mt-1 block w-full"
-                        defaultValue={item.nilai_tp}
-                        placeholder="Nilai (titer AB)"
-                        onChange={(e) => setData("nilai_tp", e.target.value)}
-                        autoComplete="off"
-                    />
-
-                    <InputError className="mt-1" message={errors.nilai_tp} />
-                </div>
+                <InputError className="mt-1" message={errors.p4} />
             </div>
         </ModalAction>
     );
