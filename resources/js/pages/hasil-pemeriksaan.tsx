@@ -57,12 +57,6 @@ export default function HasilPemeriksaan({
         post(route("hasil-pemeriksaan.search"), {});
     };
 
-    // console.log(data.tanggal);
-    // console.log(
-    //     "moment",
-    //     moment(data.tanggal).format("YYYY-MM-DD") + "T00:00:00.000Z"
-    // );
-
     return (
         <AuthenticatedLayout header="Hasil Pemeriksaan">
             <Head title="Hasil Pemeriksaan" />

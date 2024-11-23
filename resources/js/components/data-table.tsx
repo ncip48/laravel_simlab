@@ -225,7 +225,7 @@ export function DataTable<TData extends { id: number }, TValue>({
                         ) : (
                             <TableRow>
                                 <TableCell
-                                    colSpan={columns.length + 2} // Adjust for index and action columns
+                                    colSpan={columns.length + 5} // Adjust for index and action columns
                                     className="h-24 text-center"
                                 >
                                     Tidak ada data.

@@ -15,20 +15,25 @@ export function SelectOption({
     items,
     onChange,
     value,
+    wFull = false,
 }: {
-    title: string;
+    title?: string;
     items: { value: string; label: string }[];
     onChange: (id: string) => void;
     value: any;
+    wFull?: boolean;
 }) {
     return (
-        <Select onValueChange={onChange} defaultValue={value}>
-            <SelectTrigger className="w-[180px]">
+        <Select
+            onValueChange={onChange}
+            defaultValue={title ? value : items[0].value}
+        >
+            <SelectTrigger className={wFull ? "w-full" : "w-[180px]"}>
                 <SelectValue placeholder={title} />
             </SelectTrigger>
             <SelectContent>
                 <SelectGroup>
-                    <SelectLabel>{title}</SelectLabel>
+                    {title && <SelectLabel>{title}</SelectLabel>}
                     {items.map((item, index) => {
                         return (
                             <SelectItem value={item.value} key={index}>

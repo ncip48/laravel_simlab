@@ -23,9 +23,9 @@ class Antibody extends Model
     public function result()
     {
         if ($this->p1 || $this->p2 || $this->p3 || $this->p4) {
-            return true;
+            return "Positif";
         } else {
-            return false;
+            return "Negatif";
         }
     }
 }
