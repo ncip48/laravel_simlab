@@ -169,7 +169,11 @@ export function DataTable<TData extends { id: number }, TValue>({
                                 >
                                     {/* Render the row index */}
                                     <TableCell className="border">
-                                        {idx + 1}
+                                        {table.getState().pagination.pageIndex *
+                                            table.getState().pagination
+                                                .pageSize +
+                                            idx +
+                                            1}
                                     </TableCell>
 
                                     {/* Render cells */}
