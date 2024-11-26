@@ -17,10 +17,15 @@ class ImltdController extends Controller
     {
         $items = Imltd::all();
         $items = $items->map(function ($item) {
-            $item->hiv_string = $item->hiv ? "Positif" : "Negatif";
-            $item->hbsag_string = $item->hbsag ? "Positif" : "Negatif";
-            $item->hcv_string = $item->hcv ? "Positif" : "Negatif";
-            $item->tp_string = $item->tp ? "Positif" : "Negatif";
+            $item->hiv_string = $this->range_hiv($item->nilai_hiv);
+            $item->hbsag_string = $this->range_hbsag($item->nilai_hbsag);
+            $item->hcv_string = $this->range_hcv($item->nilai_hcv);
+            $item->tp_string = $this->range_tp($item->nilai_tp);
+            //range
+            $item->hiv_range = "0.90-1.10 COI";
+            $item->hbsag_range = "0.05-0.06 IU/mL";
+            $item->hcv_range = "0.90-1.10 COI";
+            $item->tp_range = "0.90-1.10 COI";
             $item->pemeriksa = User::where('id', $item->created_by)->first()->name;
             return $item;
         });
@@ -37,17 +42,59 @@ class ImltdController extends Controller
         //
     }
 
-    private function range_hiv($value)
+    private function range_hcv($value)
     {
-        $min = 20;
-        $max = 80;
+        $min = 0.90;
+        $max = 1.10;
 
         if ($value >= $min && $value <= $max) {
-            return "NEGATIVE";
+            return "NR";
         } elseif ($value > $max) {
-            return "POSITIF";
+            return "REACTIVE";
         } else {
-            return "POSITIF";
+            return "NR";
+        }
+    }
+
+    private function range_hbsag($value)
+    {
+        $min = 0.05;
+        $max = 0.06;
+
+        if ($value >= $min && $value <= $max) {
+            return "NR";
+        } elseif ($value > $max) {
+            return "REACTIVE";
+        } else {
+            return "NR";
+        }
+    }
+
+    private function range_hiv($value)
+    {
+        $min = 0.90;
+        $max = 1.10;
+
+        if ($value >= $min && $value <= $max) {
+            return "NR";
+        } elseif ($value > $max) {
+            return "REACTIVE";
+        } else {
+            return "NR";
+        }
+    }
+
+    private function range_tp($value)
+    {
+        $min = 0.90;
+        $max = 1.10;
+
+        if ($value >= $min && $value <= $max) {
+            return "NR";
+        } elseif ($value > $max) {
+            return "REACTIVE";
+        } else {
+            return "NR";
         }
     }
 

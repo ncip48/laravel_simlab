@@ -9,10 +9,13 @@ import { Separator } from "@/components/ui/separator";
 import {
     Breadcrumb,
     BreadcrumbItem,
+    BreadcrumbLink,
     BreadcrumbList,
     BreadcrumbPage,
+    BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import AppearanceDropdown from "@/components/appearance-dropdown";
+import { Link } from "@inertiajs/react";
 
 export default function AuthenticatedLayout({
     header,
@@ -34,6 +37,12 @@ export default function AuthenticatedLayout({
                         />
                         <Breadcrumb>
                             <BreadcrumbList>
+                                <BreadcrumbItem>
+                                    <BreadcrumbLink asChild>
+                                        <Link href="/dashboard">Home</Link>
+                                    </BreadcrumbLink>
+                                </BreadcrumbItem>
+                                <BreadcrumbSeparator />
                                 <BreadcrumbItem>
                                     <BreadcrumbPage>{header}</BreadcrumbPage>
                                 </BreadcrumbItem>

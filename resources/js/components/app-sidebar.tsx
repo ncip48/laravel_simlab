@@ -113,7 +113,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                         {appName}
                                     </span>
                                     <span className="truncate text-xs">
-                                        Enterprise
+                                        PMI Example
                                     </span>
                                 </div>
                             </Link>

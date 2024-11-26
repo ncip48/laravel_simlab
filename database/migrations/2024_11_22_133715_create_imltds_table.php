@@ -14,14 +14,10 @@ return new class extends Migration
         Schema::create('imltds', function (Blueprint $table) {
             $table->id();
             $table->string('blood_bag');
-            $table->tinyInteger('hiv');
-            $table->integer('nilai_hiv');
-            $table->tinyInteger('hbsag');
-            $table->integer('nilai_hbsag');
-            $table->tinyInteger('hcv');
-            $table->integer('nilai_hcv');
-            $table->tinyInteger('tp');
-            $table->integer('nilai_tp');
+            $table->double('nilai_hiv');
+            $table->double('nilai_hbsag');
+            $table->double('nilai_hcv');
+            $table->double('nilai_tp');
             $table->timestamps();
             $table->softDeletes();
             $table->integer('created_by');

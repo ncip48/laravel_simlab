@@ -32,32 +32,36 @@ export const columns: ExtendedColumnDef<ImltdType, any>[] = [
         accessorKey: "#",
         header: "HIV",
         childs: [
+            { accessorKey: "nilai_hiv", header: "Nilai" },
+            { accessorKey: "hiv_range", header: "Range" },
             { accessorKey: "hiv_string", header: "Result" },
-            { accessorKey: "nilai_hiv", header: "Nilai (titer AB)" },
         ],
     },
     {
         accessorKey: "hbsag",
         header: "HbSAg",
         childs: [
+            { accessorKey: "nilai_hbsag", header: "Nilai" },
+            { accessorKey: "hbsag_range", header: "Range" },
             { accessorKey: "hbsag_string", header: "Result" },
-            { accessorKey: "nilai_hbsag", header: "Nilai (titer AB)" },
         ],
     },
     {
         accessorKey: "hcv",
         header: "HCV",
         childs: [
+            { accessorKey: "nilai_hcv", header: "Nilai" },
+            { accessorKey: "hcv_range", header: "Range" },
             { accessorKey: "hcv_string", header: "Result" },
-            { accessorKey: "nilai_hcv", header: "Nilai (titer AB)" },
         ],
     },
     {
         accessorKey: "tp",
         header: "TP",
         childs: [
+            { accessorKey: "nilai_tp", header: "Nilai" },
+            { accessorKey: "tp_range", header: "Range" },
             { accessorKey: "tp_string", header: "Result" },
-            { accessorKey: "nilai_tp", header: "Nilai (titer AB)" },
         ],
     },
     {
