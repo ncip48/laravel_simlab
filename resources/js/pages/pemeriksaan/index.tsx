@@ -11,7 +11,7 @@ function TablePemeriksaan({ columns, data }: { columns: any; data: any }) {
         <DataTable
             columns={columns}
             data={data}
-            search="name"
+            search="patient_name"
             onDelete={(id) => <></>}
             onAdd={<></>}
             onEdit={(dx) => <></>}
