@@ -88,7 +88,10 @@ export function DataTable<TData extends { id: number }, TValue>({
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
                                 {/* Render parent headers */}
-                                <TableHead rowSpan={2} className="border">
+                                <TableHead
+                                    rowSpan={2}
+                                    className="border text-center"
+                                >
                                     #
                                 </TableHead>
                                 {headerGroup.headers.map((header) => {
@@ -168,7 +171,7 @@ export function DataTable<TData extends { id: number }, TValue>({
                                     }
                                 >
                                     {/* Render the row index */}
-                                    <TableCell className="border">
+                                    <TableCell className="border text-center">
                                         {table.getState().pagination.pageIndex *
                                             table.getState().pagination
                                                 .pageSize +
