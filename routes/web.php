@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AlatController;
 use App\Http\Controllers\AntibodyController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HasilPemeriksaanController;
 use App\Http\Controllers\ImltdController;
 use App\Http\Controllers\PasienController;
@@ -20,9 +21,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class,'index'])->middleware(['auth'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
     //pasien

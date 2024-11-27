@@ -5,6 +5,7 @@ import { DataTable } from "@/components/data-table";
 import { columns, PemeriksaanType } from "./columns";
 import { Button } from "@/components/ui/button";
 import { ActivitySquareIcon } from "lucide-react";
+import { DeletePemeriksaan } from "./form";
 
 function TablePemeriksaan({ columns, data }: { columns: any; data: any }) {
     return (
@@ -12,7 +13,7 @@ function TablePemeriksaan({ columns, data }: { columns: any; data: any }) {
             columns={columns}
             data={data}
             search="patient_name"
-            onDelete={(id) => <></>}
+            onDelete={(id) => <DeletePemeriksaan id={id} />}
             onAdd={<></>}
             onEdit={(dx) => <></>}
         />

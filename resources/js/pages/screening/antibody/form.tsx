@@ -13,6 +13,8 @@ import { toasterForm } from "@/lib/utils";
 import { ComboBox } from "@/components/combobox";
 import axios from "axios";
 import { SelectOption } from "@/components/select";
+import TextInput from "@/components/text-input";
+import { PopupDelete } from "@/components/popup-delete";
 
 const Result = [
     {
@@ -69,19 +71,13 @@ export function AddAntibody() {
             open={open}
             setOpen={setOpen}
         >
-            <div>
-                <Label htmlFor="name">No Kantong</Label>
 
-                <Input
-                    id="blood_bag"
-                    className="mt-1 block w-full"
-                    // value={data.name}
-                    onChange={(e) => setData("blood_bag", e.target.value)}
-                    autoComplete="off"
-                />
-
-                <InputError className="mt-1" message={errors.blood_bag} />
-            </div>
+            <TextInput
+                title="No Kantong Ajaib"
+                name="blood_bag"
+                onChange={(e) => setData("blood_bag", e.target.value)}
+                error={errors.blood_bag}
+            />
             <div>
                 <Label htmlFor="name">P1</Label>
                 <SelectOption
@@ -231,7 +227,7 @@ export function EditAntibody({ item }: { item: AntibodyType }) {
 export const DeleteAntibody = ({ id }: { id: number }) => {
     const { delete: destroy, processing } = useForm();
 
-    const deleteUser: FormEventHandler = (e) => {
+    const deleteAntibody: FormEventHandler = (e) => {
         e.preventDefault();
 
         destroy(route("antibody.destroy", id), {
@@ -243,7 +239,8 @@ export const DeleteAntibody = ({ id }: { id: number }) => {
     };
 
     return (
-        <form onSubmit={deleteUser}>
+        <form >
+            <PopupDelete onSubmit={deleteAntibody}>
             <Button
                 disabled={processing}
                 variant={processing ? "outline" : "destructive"}
@@ -251,6 +248,7 @@ export const DeleteAntibody = ({ id }: { id: number }) => {
             >
                 {processing ? <LoadingDots /> : <Trash2Icon />}
             </Button>
+            </PopupDelete>
         </form>
     );
 };

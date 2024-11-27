@@ -14,6 +14,7 @@ import { ComboBox } from "@/components/combobox";
 import axios from "axios";
 import { SelectOption } from "@/components/select";
 import TextInput from "@/components/text-input";
+import { PopupDelete } from "@/components/popup-delete";
 
 const JK = [
     {
@@ -275,7 +276,8 @@ export const DeletePasien = ({ id }: { id: number }) => {
     };
 
     return (
-        <form onSubmit={deleteUser}>
+        <form >
+            <PopupDelete onSubmit={deleteUser}>
             <Button
                 disabled={processing}
                 variant={processing ? "outline" : "destructive"}
@@ -283,6 +285,7 @@ export const DeletePasien = ({ id }: { id: number }) => {
             >
                 {processing ? <LoadingDots /> : <Trash2Icon />}
             </Button>
+            </PopupDelete>
         </form>
     );
 };

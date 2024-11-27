@@ -9,6 +9,9 @@ import { useForm } from "@inertiajs/react";
 import { FormEventHandler, useRef } from "react";
 import { PasienType } from "../pasien/columns";
 import TextInput from "@/components/text-input";
+import { BatteryFull, Trash2Icon } from "lucide-react";
+import LoadingDots from "@/components/loading-dots";
+import { PopupDelete } from "@/components/popup-delete";
 
 export const BLOOD_TYPE = [
     { value: "0", label: "Menunggu MCU" },
@@ -102,7 +105,7 @@ export function FormPemeriksaan({ patient }: { patient: PasienType }) {
                 <div>
                     <Label htmlFor="rhesus">Rhesus</Label>
                     <SelectOption
-                        title="Golongan Darah"
+                        title=" Rhesus"
                         items={RHESUS}
                         value=""
                         onChange={(e) => setData("rhesus", e)}
@@ -118,6 +121,7 @@ export function FormPemeriksaan({ patient }: { patient: PasienType }) {
                     size="sm"
                     onClick={() => window.history.back()}
                 >
+                    <BatteryFull />
                     Batal
                 </Button>
                 <FormButton processing={processing} />
@@ -125,3 +129,31 @@ export function FormPemeriksaan({ patient }: { patient: PasienType }) {
         </form>
     );
 }
+export const DeletePemeriksaan = ({ id }: { id: number }) => {
+    const { delete: destroy, processing } = useForm();
+
+    const deleteUser: FormEventHandler = (e) => {
+        e.preventDefault();
+
+        destroy(route("pemeriksaan.destroy", id), {
+            preserveScroll: true,
+            // onSuccess: () => closeModal(),
+            onError: () => toasterForm({ success: false, message: "Error" }),
+            // onFinish: () => reset(),
+        });
+    };
+
+    return (
+        <form>
+            <PopupDelete onSubmit={deleteUser}>
+            <Button
+                disabled={processing}
+                variant={processing ? "outline" : "destructive"}
+                size="sm"
+            >
+                {processing ? <LoadingDots /> : <Trash2Icon />}
+            </Button>
+            </PopupDelete>
+        </form>
+    );
+};

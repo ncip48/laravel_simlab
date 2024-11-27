@@ -14,6 +14,7 @@ import { ComboBox } from "@/components/combobox";
 import axios from "axios";
 import { SelectOption } from "@/components/select";
 import TextInput from "@/components/text-input";
+import { PopupDelete } from "@/components/popup-delete";
 
 const Result = [
     {
@@ -199,7 +200,7 @@ export function EditImltd({ item }: { item: ImltdType }) {
 export const DeleteImltd = ({ id }: { id: number }) => {
     const { delete: destroy, processing } = useForm();
 
-    const deleteUser: FormEventHandler = (e) => {
+    const deleteImltd: FormEventHandler = (e) => {
         e.preventDefault();
 
         destroy(route("imltd.destroy", id), {
@@ -211,7 +212,8 @@ export const DeleteImltd = ({ id }: { id: number }) => {
     };
 
     return (
-        <form onSubmit={deleteUser}>
+        <form >
+            <PopupDelete onSubmit={deleteImltd}>
             <Button
                 disabled={processing}
                 variant={processing ? "outline" : "destructive"}
@@ -219,6 +221,7 @@ export const DeleteImltd = ({ id }: { id: number }) => {
             >
                 {processing ? <LoadingDots /> : <Trash2Icon />}
             </Button>
+            </PopupDelete>
         </form>
     );
 };

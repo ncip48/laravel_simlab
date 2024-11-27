@@ -3,7 +3,7 @@ import { Head, Link } from "@inertiajs/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "@/components/data-table";
 import { Button } from "@/components/ui/button";
-import { ActivitySquareIcon } from "lucide-react";
+import { ActivitySquareIcon, Droplets, Syringe } from "lucide-react";
 import { BLOOD_TYPE, FormPemeriksaan, RHESUS } from "./form";
 import { PasienType } from "../pasien/columns";
 import { PemeriksaanType } from "./columns";
@@ -81,8 +81,11 @@ export default function Pemeriksaan({
                                             <Table>
                                                 <TableBody>
                                                     <TableRow>
-                                                        <TableCell className="font-medium w-32 p-0 py-2">
-                                                            Golongan Darah
+                                                        <TableCell className="font-medium w-40 p-0 py-2">
+                                                            <div className="flex items-center gap-2">
+                                                                <Droplets />
+                                                                Golongan Darah
+                                                            </div>
                                                         </TableCell>
                                                         <TableCell className="w-1 p-0 px-3">
                                                             :
@@ -99,7 +102,10 @@ export default function Pemeriksaan({
                                                     </TableRow>
                                                     <TableRow>
                                                         <TableCell className="font-medium p-0 py-2">
-                                                            Rhesus
+                                                            <div className="flex items-center gap-2">
+                                                                <Syringe />
+                                                                Rhesus
+                                                            </div>
                                                         </TableCell>
                                                         <TableCell className="p-0 px-3">
                                                             :

@@ -97,6 +97,6 @@ class PemeriksaanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Examination::where('id', $id)->delete();
     }
 }

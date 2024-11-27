@@ -11,6 +11,7 @@ import { CogIcon, Trash2Icon } from "lucide-react";
 import { toasterForm } from "@/lib/utils";
 import { AlatType } from "./columns";
 import { PageProps } from "@/types";
+import { PopupDelete } from "@/components/popup-delete";
 
 export function AddAlat() {
     const [open, setOpen] = useState(false);
@@ -146,7 +147,7 @@ export function EditAlat({ item }: { item: AlatType }) {
 export const DeleteAlat = ({ id }: { id: number }) => {
     const { delete: destroy, processing } = useForm();
 
-    const deleteUser: FormEventHandler = (e) => {
+    const deleteAlat: FormEventHandler = (e) => {
         e.preventDefault();
 
         destroy(route("alat.destroy", id), {
@@ -158,7 +159,8 @@ export const DeleteAlat = ({ id }: { id: number }) => {
     };
 
     return (
-        <form onSubmit={deleteUser}>
+        <form >
+            <PopupDelete onSubmit={deleteAlat}>
             <Button
                 disabled={processing}
                 variant={processing ? "outline" : "destructive"}
@@ -166,6 +168,7 @@ export const DeleteAlat = ({ id }: { id: number }) => {
             >
                 {processing ? <LoadingDots /> : <Trash2Icon />}
             </Button>
+            </PopupDelete>
         </form>
     );
 };
