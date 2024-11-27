@@ -94,7 +94,7 @@ export const ModalAction = ({
     );
 };
 
-const FormButton = ({ processing }: { processing: boolean }) => {
+export const FormButton = ({ processing }: { processing: boolean }) => {
     return (
         <Button type="submit" disabled={processing} size="sm">
             {processing ? <LoadingDots /> : <p>Simpan</p>}

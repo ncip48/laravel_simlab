@@ -13,6 +13,8 @@ export type PasienType = {
     post_code: string | null;
     gender: string | null;
     birth_date: string | null;
+    jk_string: string | null;
+    age: string | null;
 };
 
 export const columns: ColumnDef<PasienType>[] = [

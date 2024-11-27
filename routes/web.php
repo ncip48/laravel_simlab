@@ -27,6 +27,7 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth'])->group(function () {
     //pasien
     Route::resource('/pasien', PasienController::class);
+    Route::get('/pasien/{pasien}/pemeriksaan', [PasienController::class, 'pemeriksaan'])->name('pasien.pemeriksaan');
     //pemeriksaan
     Route::resource('/pemeriksaan', PemeriksaanController::class);
     //alat

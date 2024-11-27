@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\District;
+use App\Models\Examination;
 use App\Models\Patient;
 use App\Models\Province;
 use App\Models\Regency;
@@ -128,5 +129,38 @@ class PasienController extends Controller
     public function destroy(string $id)
     {
         Patient::where('id', $id)->delete();
+    }
+
+    public function pemeriksaan(string $id)
+    {
+        $patient = Patient::find($id);
+        $patient->jk_string = $patient->jk_string();
+        $province = $patient->province->name ?? '';
+        $regency = $patient->regency->name ?? '';
+        $district = $patient->district->name ?? '';
+        $village = $patient->village->name ?? '';
+        $patient->address_full = "$patient->address, $village, $district, $regency, Provinsi $province, $patient->post_code";
+        if ($patient->birth_date) {
+            $birthDate = Carbon::parse($patient->birth_date);
+            $now = Carbon::now();
+
+            $years = floor($birthDate->diffInYears($now)); // Get complete years
+            $months = floor($birthDate->copy()->addYears($years)->diffInMonths($now)); // Get remaining months
+
+            // Format age as "X year(s) Y month(s)"
+            if ($years > 0) {
+                $patient->age = "{$years} tahun" . ($months > 0 ? " {$months} bulan" : "");
+            } else {
+                $patient->age = "{$months} bulan";
+            }
+        } else {
+            $patient->age = null; // No age if birth_date is missing
+        }
+
+        $items = Examination::with('patient')->where('patient_id', $id)->get();
+        return Inertia::render('pemeriksaan/detail', [
+            'items' => $items,
+            'patient' => $patient,
+        ]);
     }
 }

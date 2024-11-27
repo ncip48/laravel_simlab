@@ -18,7 +18,7 @@ function TablePasien({ columns, data }: { columns: any; data: any }) {
             onEdit={(dx) => <EditPasien item={dx} />}
             leftAction={(dx) => {
                 return (
-                    <Link href={`pemeriksaan/${dx.id}`}>
+                    <Link href={`pasien/${dx.id}/pemeriksaan`}>
                         <Button size="sm" variant="secondary">
                             <ActivitySquareIcon />
                         </Button>

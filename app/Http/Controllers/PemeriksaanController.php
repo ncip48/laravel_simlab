@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Examination;
 use Illuminate\Http\Request;
 
 class PemeriksaanController extends Controller
@@ -27,7 +28,17 @@ class PemeriksaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'blood_bag' => 'required',
+            'blood_type' => 'required',
+            'rhesus' => 'required',
+        ], [
+            'blood_bag.required' => 'No kantong tidak boleh kosong',
+            'blood_type.required' => 'Golongan darah harus dipilih',
+            'rhesus.required' => 'Rhesus harus dipilih',
+        ]);
+
+        Examination::create($request->all());
     }
 
     /**
