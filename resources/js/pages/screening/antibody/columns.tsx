@@ -14,7 +14,7 @@ export type AntibodyType = {
     nilai_tp: string;
 };
 
-interface ExtendedColumnDef<TData, TValue>
+export interface ExtendedColumnDef<TData, TValue>
     extends Omit<ColumnDef<TData, TValue>, "childs"> {
     accessorKey: string;
     childs?: ExtendedColumnDef<TData, TValue>[];

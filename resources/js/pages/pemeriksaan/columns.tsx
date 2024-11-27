@@ -1,5 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { PasienType } from "../pasien/columns";
+import { ExtendedColumnDef } from "../screening/antibody/columns";
 
 export type PemeriksaanType = {
     id?: number;
@@ -9,14 +10,20 @@ export type PemeriksaanType = {
     patient: PasienType;
 };
 
-export const columns: ColumnDef<PemeriksaanType>[] = [
+export const columns: ExtendedColumnDef<PemeriksaanType, PemeriksaanType>[] = [
     {
-        accessorKey: "patient_name",
-        header: "Nama",
-    },
-    {
-        accessorKey: "blood_bag",
-        header: "No Kantong",
+        accessorKey: "#",
+        header: "Pasien",
+        childs: [
+            {
+                accessorKey: "patient_name",
+                header: "Nama",
+            },
+            {
+                accessorKey: "blood_bag",
+                header: "No Kantong",
+            },
+        ],
     },
     {
         accessorKey: "blood_type",
