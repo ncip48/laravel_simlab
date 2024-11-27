@@ -63,7 +63,7 @@ class AlatController extends Controller
             'folder' => 'required',
         ], [
             'name.required' => 'Nama tidak boleh kosong',
-            'folder.required' => 'Alamat tidak boleh kosong',
+            'folder.required' => 'Folder tidak boleh kosong',
         ]);
 
         Device::create($request->all());
@@ -95,7 +95,7 @@ class AlatController extends Controller
             'folder' => 'required',
         ], [
             'name.required' => 'Nama tidak boleh kosong',
-            'folder.required' => 'Alamat tidak boleh kosong',
+            'folder.required' => 'Folder tidak boleh kosong',
         ]);
 
         Device::where('id', $id)->update($request->all());
