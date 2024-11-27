@@ -8,6 +8,7 @@ import { toasterForm } from "@/lib/utils";
 import { useForm } from "@inertiajs/react";
 import { FormEventHandler, useRef } from "react";
 import { PasienType } from "../pasien/columns";
+import TextInput from "@/components/text-input";
 
 export const BLOOD_TYPE = [
     { value: "0", label: "Menunggu MCU" },
@@ -72,25 +73,19 @@ export function FormPemeriksaan({ patient }: { patient: PasienType }) {
     return (
         <form ref={formRef} onSubmit={submit}>
             <div className="grid gap-4 py-4">
-                <div>
-                    <Label htmlFor="blood_bag">No Kantong</Label>
-
-                    <Input
-                        id="blood_bag"
-                        className="mt-1 block w-full"
-                        onChange={(e) => setData("blood_bag", e.target.value)}
-                        autoComplete="off"
-                        autoFocus
-                        ref={bloodBagRef}
-                        onBlur={(e: any) => {
-                            if (e.relatedTarget === null) {
-                                e.target.focus();
-                            }
-                        }}
-                    />
-
-                    <InputError className="mt-1" message={errors.blood_bag} />
-                </div>
+                <TextInput
+                    title="No Kantong"
+                    name="blood_bag"
+                    onChange={(e) => setData("blood_bag", e.target.value)}
+                    autoFocus
+                    ref={bloodBagRef}
+                    onBlur={(e: any) => {
+                        if (e.relatedTarget === null) {
+                            e.target.focus();
+                        }
+                    }}
+                    error={errors.blood_bag}
+                />
                 <div>
                     <Label htmlFor="blood_type">Golongan Darah</Label>
                     <SelectOption

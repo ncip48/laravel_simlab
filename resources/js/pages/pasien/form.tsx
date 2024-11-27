@@ -13,6 +13,7 @@ import { toasterForm } from "@/lib/utils";
 import { ComboBox } from "@/components/combobox";
 import axios from "axios";
 import { SelectOption } from "@/components/select";
+import TextInput from "@/components/text-input";
 
 const JK = [
     {
@@ -88,32 +89,18 @@ export function AddPasien() {
             open={open}
             setOpen={setOpen}
         >
-            <div>
-                <Label htmlFor="name">NIK</Label>
-
-                <Input
-                    id="nik"
-                    className="mt-1 block w-full"
-                    // value={data.name}
-                    onChange={(e) => setData("identity_number", e.target.value)}
-                    autoComplete="off"
-                />
-
-                <InputError className="mt-1" message={errors.identity_number} />
-            </div>
-            <div>
-                <Label htmlFor="name">Nama Pasien</Label>
-
-                <Input
-                    id="name"
-                    className="mt-1 block w-full"
-                    // value={data.name}
-                    onChange={(e) => setData("name", e.target.value)}
-                    autoComplete="off"
-                />
-
-                <InputError className="mt-1" message={errors.name} />
-            </div>
+            <TextInput
+                title="NIK"
+                name="nik"
+                onChange={(e) => setData("identity_number", e.target.value)}
+                error={errors.identity_number}
+            />
+            <TextInput
+                title="Nama Pasien"
+                name="name"
+                onChange={(e) => setData("name", e.target.value)}
+                error={errors.name}
+            />
             {/* <div>
                 <ComboBox
                     title="Pilih Provinsi"
@@ -125,19 +112,12 @@ export function AddPasien() {
                 <InputError className="mt-1" message={errors.province_id} />
             </div> */}
             {/* <SelectOption /> */}
-            <div>
-                <Label htmlFor="name">Kode Pos</Label>
-
-                <Input
-                    id="post_code"
-                    className="mt-1 block w-full"
-                    // value={data.name}
-                    onChange={(e) => setData("post_code", e.target.value)}
-                    autoComplete="off"
-                />
-
-                <InputError className="mt-1" message={errors.post_code} />
-            </div>
+            <TextInput
+                title="Kode Pos"
+                name="post_code"
+                onChange={(e) => setData("post_code", e.target.value)}
+                error={errors.post_code}
+            />
             <div>
                 <Label htmlFor="name">Jenis Kelamin</Label>
                 <SelectOption
@@ -217,45 +197,27 @@ export function EditPasien({ item }: { item: PasienType }) {
             open={open}
             setOpen={setOpen}
         >
-            <div>
-                <Label htmlFor="name">NIK</Label>
-
-                <Input
-                    id="nik"
-                    className="mt-1 block w-full"
-                    defaultValue={item.identity_number || ""}
-                    onChange={(e) => setData("identity_number", e.target.value)}
-                    autoComplete="off"
-                />
-
-                <InputError className="mt-1" message={errors.identity_number} />
-            </div>
-            <div>
-                <Label htmlFor="name">Nama Pasien</Label>
-
-                <Input
-                    id="name"
-                    className="mt-1 block w-full"
-                    defaultValue={item.name || ""}
-                    onChange={(e) => setData("name", e.target.value)}
-                    autoComplete="name"
-                />
-
-                <InputError className="mt-1" message={errors.name} />
-            </div>
-            <div>
-                <Label htmlFor="name">Kode Pos</Label>
-
-                <Input
-                    id="post_code"
-                    className="mt-1 block w-full"
-                    defaultValue={item.post_code || ""}
-                    onChange={(e) => setData("post_code", e.target.value)}
-                    autoComplete="off"
-                />
-
-                <InputError className="mt-1" message={errors.post_code} />
-            </div>
+            <TextInput
+                title="NIK"
+                name="nik"
+                defaultValue={item.identity_number || ""}
+                onChange={(e) => setData("identity_number", e.target.value)}
+                error={errors.identity_number}
+            />
+            <TextInput
+                title="Nama Pasien"
+                name="name"
+                defaultValue={item.name || ""}
+                onChange={(e) => setData("name", e.target.value)}
+                error={errors.name}
+            />
+            <TextInput
+                title="Kode Pos"
+                name="post_code"
+                defaultValue={item.post_code || ""}
+                onChange={(e) => setData("post_code", e.target.value)}
+                error={errors.post_code}
+            />
             <div>
                 <Label htmlFor="name">Jenis Kelamin</Label>
                 <SelectOption
