@@ -13,13 +13,9 @@ class Imltd extends Model
 
     protected $fillable = [
         'blood_bag',
-        'hiv',
         'nilai_hiv',
-        'hbsag',
         'nilai_hbsag',
-        'hcv',
         'nilai_hcv',
-        'tp',
         'nilai_tp',
         'created_by'
     ];

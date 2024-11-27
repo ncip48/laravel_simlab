@@ -13,6 +13,7 @@ import { toasterForm } from "@/lib/utils";
 import { ComboBox } from "@/components/combobox";
 import axios from "axios";
 import { SelectOption } from "@/components/select";
+import TextInput from "@/components/text-input";
 
 const Result = [
     {
@@ -38,13 +39,9 @@ export function AddImltd() {
         reset,
     } = useForm({
         blood_bag: "",
-        hiv: "",
         nilai_hiv: "",
-        hbsag: "",
         nilai_hbsag: "",
-        hcv: "",
         nilai_hcv: "",
-        tp: "",
         nilai_tp: "",
     });
 
@@ -73,119 +70,44 @@ export function AddImltd() {
             open={open}
             setOpen={setOpen}
         >
-            <div>
-                <Label htmlFor="name">No Kantong</Label>
+            <TextInput
+                title="No Kantong"
+                name="blood_bag"
+                onChange={(e) => setData("blood_bag", e.target.value)}
+                error={errors.blood_bag}
+                placeholder="Masukkan no kantong"
+            />
+            <TextInput
+                title="HIV"
+                name="nilai_hiv"
+                placeholder="Nilai (titer AB)"
+                onChange={(e) => setData("nilai_hiv", e.target.value)}
+                error={errors.nilai_hiv}
+            />
 
-                <Input
-                    id="blood_bag"
-                    className="mt-1 block w-full"
-                    // value={data.name}
-                    onChange={(e) => setData("blood_bag", e.target.value)}
-                    autoComplete="off"
-                />
+            <TextInput
+                title="HbSAg"
+                name="nilai_hbsag"
+                placeholder="Nilai (titer AB)"
+                onChange={(e) => setData("nilai_hbsag", e.target.value)}
+                error={errors.nilai_hbsag}
+            />
 
-                <InputError className="mt-1" message={errors.blood_bag} />
-            </div>
-            <div className="flex gap-3 items-end">
-                <div>
-                    <Label htmlFor="name">HIV</Label>
-                    <SelectOption
-                        title="Pilih Result"
-                        items={Result}
-                        value=""
-                        onChange={(e) => setData("hiv", e)}
-                    />
+            <TextInput
+                title="HCV"
+                name="nilai_hcv"
+                placeholder="Nilai (titer AB)"
+                onChange={(e) => setData("nilai_hcv", e.target.value)}
+                error={errors.nilai_hcv}
+            />
 
-                    <InputError className="mt-1" message={errors.hiv} />
-                </div>
-                <div>
-                    <Input
-                        id="nilai_hiv"
-                        className="mt-1 block w-full"
-                        // value={data.name}
-                        placeholder="Nilai (titer AB)"
-                        onChange={(e) => setData("nilai_hiv", e.target.value)}
-                        autoComplete="off"
-                    />
-
-                    <InputError className="mt-1" message={errors.nilai_hiv} />
-                </div>
-            </div>
-            <div className="flex gap-3 items-end">
-                <div>
-                    <Label htmlFor="name">HbsAg</Label>
-                    <SelectOption
-                        title="Pilih Result"
-                        items={Result}
-                        value=""
-                        onChange={(e) => setData("hbsag", e)}
-                    />
-
-                    <InputError className="mt-1" message={errors.hbsag} />
-                </div>
-                <div>
-                    <Input
-                        id="nilai_hbsag"
-                        className="mt-1 block w-full"
-                        // value={data.name}
-                        placeholder="Nilai (titer AB)"
-                        onChange={(e) => setData("nilai_hbsag", e.target.value)}
-                        autoComplete="off"
-                    />
-
-                    <InputError className="mt-1" message={errors.nilai_hbsag} />
-                </div>
-            </div>
-            <div className="flex gap-3 items-end">
-                <div>
-                    <Label htmlFor="name">HCV</Label>
-                    <SelectOption
-                        title="Pilih Result"
-                        items={Result}
-                        value=""
-                        onChange={(e) => setData("hcv", e)}
-                    />
-
-                    <InputError className="mt-1" message={errors.hcv} />
-                </div>
-                <div>
-                    <Input
-                        id="nilai_hcv"
-                        className="mt-1 block w-full"
-                        // value={data.name}
-                        placeholder="Nilai (titer AB)"
-                        onChange={(e) => setData("nilai_hcv", e.target.value)}
-                        autoComplete="off"
-                    />
-
-                    <InputError className="mt-1" message={errors.nilai_hcv} />
-                </div>
-            </div>
-            <div className="flex gap-3 items-end">
-                <div>
-                    <Label htmlFor="name">TP</Label>
-                    <SelectOption
-                        title="Pilih Result"
-                        items={Result}
-                        value=""
-                        onChange={(e) => setData("tp", e)}
-                    />
-
-                    <InputError className="mt-1" message={errors.tp} />
-                </div>
-                <div>
-                    <Input
-                        id="nilai_tp"
-                        className="mt-1 block w-full"
-                        // value={data.name}
-                        placeholder="Nilai (titer AB)"
-                        onChange={(e) => setData("nilai_tp", e.target.value)}
-                        autoComplete="off"
-                    />
-
-                    <InputError className="mt-1" message={errors.nilai_tp} />
-                </div>
-            </div>
+            <TextInput
+                title="TP"
+                name="nilai_tp"
+                placeholder="Nilai (titer AB)"
+                onChange={(e) => setData("nilai_tp", e.target.value)}
+                error={errors.nilai_tp}
+            />
         </ModalAction>
     );
 }
@@ -194,13 +116,9 @@ export function EditImltd({ item }: { item: ImltdType }) {
     const [open, setOpen] = useState(false);
     const { data, setData, patch, errors, processing, reset } = useForm({
         blood_bag: item.blood_bag,
-        hiv: item.hiv,
         nilai_hiv: item.nilai_hiv,
-        hbsag: item.hbsag,
         nilai_hbsag: item.nilai_hbsag,
-        hcv: item.hcv,
         nilai_hcv: item.nilai_hcv,
-        tp: item.tp,
         nilai_tp: item.nilai_tp,
     });
 
@@ -231,119 +149,49 @@ export function EditImltd({ item }: { item: ImltdType }) {
             open={open}
             setOpen={setOpen}
         >
-            <div>
-                <Label htmlFor="name">No Kantong</Label>
+            <TextInput
+                title="No Kantong"
+                name="blood_bag"
+                onChange={(e) => setData("blood_bag", e.target.value)}
+                error={errors.blood_bag}
+                placeholder="Masukkan no kantong"
+                defaultValue={item.blood_bag}
+            />
+            <TextInput
+                title="HIV"
+                name="nilai_hiv"
+                placeholder="Nilai (titer AB)"
+                onChange={(e) => setData("nilai_hiv", e.target.value)}
+                error={errors.nilai_hiv}
+                defaultValue={item.nilai_hiv}
+            />
 
-                <Input
-                    id="blood_bag"
-                    className="mt-1 block w-full"
-                    defaultValue={item.blood_bag}
-                    onChange={(e) => setData("blood_bag", e.target.value)}
-                    autoComplete="off"
-                />
+            <TextInput
+                title="HbSAg"
+                name="nilai_hbsag"
+                placeholder="Nilai (titer AB)"
+                onChange={(e) => setData("nilai_hbsag", e.target.value)}
+                error={errors.nilai_hbsag}
+                defaultValue={item.nilai_hbsag}
+            />
 
-                <InputError className="mt-1" message={errors.blood_bag} />
-            </div>
-            <div className="flex gap-3 items-end">
-                <div>
-                    <Label htmlFor="name">HIV</Label>
-                    <SelectOption
-                        title="Pilih Result"
-                        items={Result}
-                        value={String(data.hiv)}
-                        onChange={(e) => setData("hiv", e)}
-                    />
+            <TextInput
+                title="HCV"
+                name="nilai_hcv"
+                placeholder="Nilai (titer AB)"
+                onChange={(e) => setData("nilai_hcv", e.target.value)}
+                error={errors.nilai_hcv}
+                defaultValue={item.nilai_hcv}
+            />
 
-                    <InputError className="mt-1" message={errors.hiv} />
-                </div>
-                <div>
-                    <Input
-                        id="nilai_hiv"
-                        className="mt-1 block w-full"
-                        defaultValue={item.nilai_hiv}
-                        placeholder="Nilai (titer AB)"
-                        onChange={(e) => setData("nilai_hiv", e.target.value)}
-                        autoComplete="off"
-                    />
-
-                    <InputError className="mt-1" message={errors.nilai_hiv} />
-                </div>
-            </div>
-            <div className="flex gap-3 items-end">
-                <div>
-                    <Label htmlFor="name">HbsAg</Label>
-                    <SelectOption
-                        title="Pilih Result"
-                        items={Result}
-                        value={String(data.hbsag)}
-                        onChange={(e) => setData("hbsag", e)}
-                    />
-
-                    <InputError className="mt-1" message={errors.hbsag} />
-                </div>
-                <div>
-                    <Input
-                        id="nilai_hbsag"
-                        className="mt-1 block w-full"
-                        defaultValue={item.nilai_hbsag}
-                        placeholder="Nilai (titer AB)"
-                        onChange={(e) => setData("nilai_hbsag", e.target.value)}
-                        autoComplete="off"
-                    />
-
-                    <InputError className="mt-1" message={errors.nilai_hbsag} />
-                </div>
-            </div>
-            <div className="flex gap-3 items-end">
-                <div>
-                    <Label htmlFor="name">HCV</Label>
-                    <SelectOption
-                        title="Pilih Result"
-                        items={Result}
-                        value={String(data.hcv)}
-                        onChange={(e) => setData("hcv", e)}
-                    />
-
-                    <InputError className="mt-1" message={errors.hcv} />
-                </div>
-                <div>
-                    <Input
-                        id="nilai_hcv"
-                        className="mt-1 block w-full"
-                        defaultValue={item.nilai_hcv}
-                        placeholder="Nilai (titer AB)"
-                        onChange={(e) => setData("nilai_hcv", e.target.value)}
-                        autoComplete="off"
-                    />
-
-                    <InputError className="mt-1" message={errors.nilai_hcv} />
-                </div>
-            </div>
-            <div className="flex gap-3 items-end">
-                <div>
-                    <Label htmlFor="name">TP</Label>
-                    <SelectOption
-                        title="Pilih Result"
-                        items={Result}
-                        value={String(data.tp)}
-                        onChange={(e) => setData("tp", e)}
-                    />
-
-                    <InputError className="mt-1" message={errors.tp} />
-                </div>
-                <div>
-                    <Input
-                        id="nilai_tp"
-                        className="mt-1 block w-full"
-                        defaultValue={item.nilai_tp}
-                        placeholder="Nilai (titer AB)"
-                        onChange={(e) => setData("nilai_tp", e.target.value)}
-                        autoComplete="off"
-                    />
-
-                    <InputError className="mt-1" message={errors.nilai_tp} />
-                </div>
-            </div>
+            <TextInput
+                title="TP"
+                name="nilai_tp"
+                placeholder="Nilai (titer AB)"
+                onChange={(e) => setData("nilai_tp", e.target.value)}
+                error={errors.nilai_tp}
+                defaultValue={item.nilai_tp}
+            />
         </ModalAction>
     );
 }

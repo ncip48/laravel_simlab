@@ -105,13 +105,9 @@ class ImltdController extends Controller
     {
         $request->validate([
             'blood_bag' => 'required',
-            'hiv' => 'required',
             'nilai_hiv' => 'required',
-            'hbsag' => 'required',
             'nilai_hbsag' => 'required',
-            'hcv' => 'required',
             'nilai_hcv' => 'required',
-            'tp' => 'required',
             'nilai_tp' => 'required',
         ]);
 
@@ -142,13 +138,9 @@ class ImltdController extends Controller
     {
         $request->validate([
             'blood_bag' => 'required',
-            'hiv' => 'required',
             'nilai_hiv' => 'required',
-            'hbsag' => 'required',
             'nilai_hbsag' => 'required',
-            'hcv' => 'required',
             'nilai_hcv' => 'required',
-            'tp' => 'required',
             'nilai_tp' => 'required',
         ]);
 
