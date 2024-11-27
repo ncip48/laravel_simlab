@@ -42,7 +42,7 @@ export default function DeleteUserForm({
             preserveScroll: true,
             onSuccess: () => closeModal(),
             onError: () => passwordInput.current?.focus(),
-            onFinish: () => reset(),
+            // onFinish: () => reset(),
         });
     };
 

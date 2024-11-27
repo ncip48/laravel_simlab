@@ -50,7 +50,7 @@ export function AddAntibody() {
         post(route("antibody.store"), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
-            onFinish: () => reset(),
+            // onFinish: () => reset(),
         });
     };
 
@@ -148,7 +148,7 @@ export function EditAntibody({ item }: { item: AntibodyType }) {
         patch(route("antibody.update", item.id), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
-            onFinish: () => reset(),
+            // onFinish: () => reset(),
         });
     };
 

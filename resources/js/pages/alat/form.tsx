@@ -25,7 +25,7 @@ export function AddAlat() {
         post(route("alat.store"), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
-            onFinish: () => reset(),
+            // onFinish: () => reset(),
         });
     };
 
@@ -91,7 +91,7 @@ export function EditAlat({ item }: { item: AlatType }) {
         patch(route("alat.update", item.id), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
-            onFinish: () => reset(),
+            // onFinish: () => reset(),
         });
     };
 

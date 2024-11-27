@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "@/components/data-table";
 import { Button } from "@/components/ui/button";
 import { ActivitySquareIcon } from "lucide-react";
-import { FormPemeriksaan } from "./form";
+import { BLOOD_TYPE, FormPemeriksaan, RHESUS } from "./form";
 import { PasienType } from "../pasien/columns";
 import { PemeriksaanType } from "./columns";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
@@ -88,7 +88,13 @@ export default function Pemeriksaan({
                                                             :
                                                         </TableCell>
                                                         <TableCell className="p-0">
-                                                            {item.blood_type}
+                                                            {
+                                                                BLOOD_TYPE.filter(
+                                                                    (val) =>
+                                                                        val.value ==
+                                                                        item.blood_type
+                                                                )[0]?.label
+                                                            }
                                                         </TableCell>
                                                     </TableRow>
                                                     <TableRow>
@@ -99,7 +105,13 @@ export default function Pemeriksaan({
                                                             :
                                                         </TableCell>
                                                         <TableCell className="p-0">
-                                                            {item.rhesus}
+                                                            {
+                                                                RHESUS.filter(
+                                                                    (val) =>
+                                                                        val.value ==
+                                                                        item.rhesus
+                                                                )[0].label
+                                                            }
                                                         </TableCell>
                                                     </TableRow>
                                                 </TableBody>

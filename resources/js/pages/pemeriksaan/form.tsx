@@ -9,7 +9,7 @@ import { useForm } from "@inertiajs/react";
 import { FormEventHandler, useRef } from "react";
 import { PasienType } from "../pasien/columns";
 
-const BLOOD_TYPE = [
+export const BLOOD_TYPE = [
     { value: "0", label: "Menunggu MCU" },
     { value: "1", label: "A" },
     { value: "2", label: "B" },
@@ -17,7 +17,7 @@ const BLOOD_TYPE = [
     { value: "4", label: "O" },
 ];
 
-const RHESUS = [
+export const RHESUS = [
     { value: "0", label: "Menunggu MCU" },
     { value: "1", label: "??" },
     { value: "2", label: "!!" },
@@ -25,6 +25,7 @@ const RHESUS = [
 
 export function FormPemeriksaan({ patient }: { patient: PasienType }) {
     const formRef = useRef<HTMLFormElement>(null);
+    const bloodBagRef = useRef<HTMLInputElement>(null);
 
     const {
         data,
@@ -47,13 +48,23 @@ export function FormPemeriksaan({ patient }: { patient: PasienType }) {
 
         post(route("pemeriksaan.store"), {
             preserveScroll: true,
+            preserveState: true,
             onSuccess: () => onSuccess(),
-            onFinish: () => reset(),
+            onError: () => onFocusBloodBag(),
         });
+    };
+
+    const onFocusBloodBag = () => {
+        if (bloodBagRef.current) {
+            bloodBagRef.current.focus();
+        }
     };
 
     const onSuccess = () => {
         formRef.current?.reset();
+        if (bloodBagRef.current) {
+            bloodBagRef.current.focus();
+        }
         toasterForm({ success: true, message: "Success" });
         reset();
     };
@@ -69,6 +80,13 @@ export function FormPemeriksaan({ patient }: { patient: PasienType }) {
                         className="mt-1 block w-full"
                         onChange={(e) => setData("blood_bag", e.target.value)}
                         autoComplete="off"
+                        autoFocus
+                        ref={bloodBagRef}
+                        onBlur={(e: any) => {
+                            if (e.relatedTarget === null) {
+                                e.target.focus();
+                            }
+                        }}
                     />
 
                     <InputError className="mt-1" message={errors.blood_bag} />
@@ -79,7 +97,9 @@ export function FormPemeriksaan({ patient }: { patient: PasienType }) {
                         title="Golongan Darah"
                         items={BLOOD_TYPE}
                         value=""
-                        onChange={(e) => setData("blood_type", e)}
+                        onChange={(e) => {
+                            setData("blood_type", e);
+                        }}
                         wFull
                     />
                     <InputError className="mt-1" message={errors.blood_type} />

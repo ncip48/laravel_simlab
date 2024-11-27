@@ -54,7 +54,7 @@ export function AddImltd() {
         post(route("imltd.store"), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
-            onFinish: () => reset(),
+            // onFinish: () => reset(),
         });
     };
 
@@ -212,7 +212,7 @@ export function EditImltd({ item }: { item: ImltdType }) {
         patch(route("imltd.update", item.id), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
-            onFinish: () => reset(),
+            // onFinish: () => reset(),
         });
     };
 

@@ -69,7 +69,7 @@ export function AddPasien() {
         post(route("pasien.store"), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
-            onFinish: () => reset(),
+            // onFinish: () => reset(),
         });
     };
 
@@ -198,7 +198,7 @@ export function EditPasien({ item }: { item: PasienType }) {
         patch(route("pasien.update", item.id), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
-            onFinish: () => reset(),
+            // onFinish: () => reset(),
         });
     };
 
