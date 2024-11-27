@@ -12,6 +12,7 @@ import { ComboBox } from "@/components/combobox";
 import { DatePicker } from "@/components/datepicker";
 import { Button } from "@/components/ui/button";
 import moment from "moment";
+import { Input } from "@/components/ui/input";
 
 const items = [
     {
@@ -49,8 +50,8 @@ export default function HasilPemeriksaan({
     // console.log(alat, tanggal, props);
     const { data, setData, post, errors, processing, recentlySuccessful } =
         useForm({
-            alat, // Initial value for alat
-            tanggal, // Initial value for tanggal
+            alat: "", // Initial value for alat
+            tanggal: "", // Initial value for tanggal
         });
 
     const handleSearch = () => {
@@ -78,8 +79,11 @@ export default function HasilPemeriksaan({
                                 value={data.alat}
                                 onChange={(e) => setData("alat", e)}
                             />
-                            <DatePicker
-                                label="Pilih Tanggal"
+                            {/* <DatePicker */}
+                            <Input
+                                className="w-fit"
+                                type="date"
+                                // label="Pilih Tanggal"
                                 // value={
                                 //     moment(data.tanggal).format("YYYY-MM-DD") +
                                 //     "T00:00:00.000Z"
@@ -87,8 +91,9 @@ export default function HasilPemeriksaan({
                                 value={data.tanggal}
                                 onChange={(date) => {
                                     // console.log("dari sl", date);
-                                    const tgl =
-                                        moment(date).format("YYYY-MM-DD");
+                                    const tgl = moment(
+                                        date.target.value
+                                    ).format("YYYY-MM-DD");
                                     setData("tanggal", tgl);
                                 }}
                             />
