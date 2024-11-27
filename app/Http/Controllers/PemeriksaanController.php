@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Examination;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PemeriksaanController extends Controller
 {
@@ -12,7 +13,14 @@ class PemeriksaanController extends Controller
      */
     public function index()
     {
-        //
+        $items = Examination::with('patient')->get();
+        $items = $items->map(function ($item) {
+            $item->patient_name = $item->patient()->first()->name;
+            return $item;
+        });
+        return Inertia::render('pemeriksaan/index', [
+            'items' => $items,
+        ]);
     }
 
     /**
