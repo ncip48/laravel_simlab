@@ -8,6 +8,20 @@ use Inertia\Inertia;
 
 class PemeriksaanController extends Controller
 {
+    private $BLOOD_TYPE = [
+        ['value' => "0", 'label' => "Menunggu MCU"],
+        ['value' => "1", 'label' => "A"],
+        ['value' => "2", 'label' => "B"],
+        ['value' => "3", 'label' => "AB"],
+        ['value' => "4", 'label' => "O"],
+    ];
+
+    private $RHESUS = [
+        ['value' => "0", 'label' => "Menunggu MCU"],
+        ['value' => "1", 'label' => "??"],
+        ['value' => "2", 'label' => "!!"],
+    ];
+
     /**
      * Display a listing of the resource.
      */
@@ -16,6 +30,11 @@ class PemeriksaanController extends Controller
         $items = Examination::with('patient')->get();
         $items = $items->map(function ($item) {
             $item->patient_name = $item->patient()->first()->name;
+            $item->blood_type = collect($this->BLOOD_TYPE)
+                ->firstWhere('value', $item->blood_type)['label'] ?? null;
+            $item->rhesus = collect($this->RHESUS)
+                ->firstWhere('value', $item->rhesus)['label'] ?? null;
+
             return $item;
         });
         return Inertia::render('pemeriksaan/index', [
