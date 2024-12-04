@@ -9,7 +9,7 @@ import { useForm } from "@inertiajs/react";
 import { FormEventHandler, useRef } from "react";
 import { PasienType } from "../pasien/columns";
 import TextInput from "@/components/text-input";
-import { BatteryFull, Trash2Icon } from "lucide-react";
+import { BatteryFull, Trash2Icon, XCircleIcon } from "lucide-react";
 import LoadingDots from "@/components/loading-dots";
 import { PopupDelete } from "@/components/popup-delete";
 
@@ -121,7 +121,7 @@ export function FormPemeriksaan({ patient }: { patient: PasienType }) {
                     size="sm"
                     onClick={() => window.history.back()}
                 >
-                    <BatteryFull />
+                    <XCircleIcon />
                     Batal
                 </Button>
                 <FormButton processing={processing} />
@@ -146,13 +146,13 @@ export const DeletePemeriksaan = ({ id }: { id: number }) => {
     return (
         <form>
             <PopupDelete onSubmit={deleteUser}>
-            <Button
-                disabled={processing}
-                variant={processing ? "outline" : "destructive"}
-                size="sm"
-            >
-                {processing ? <LoadingDots /> : <Trash2Icon />}
-            </Button>
+                <Button
+                    disabled={processing}
+                    variant={processing ? "outline" : "destructive"}
+                    size="sm"
+                >
+                    {processing ? <LoadingDots /> : <Trash2Icon />}
+                </Button>
             </PopupDelete>
         </form>
     );

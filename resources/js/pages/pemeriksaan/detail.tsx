@@ -8,6 +8,7 @@ import { BLOOD_TYPE, FormPemeriksaan, RHESUS } from "./form";
 import { PasienType } from "../pasien/columns";
 import { PemeriksaanType } from "./columns";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function Pemeriksaan({
     items,
@@ -68,67 +69,72 @@ export default function Pemeriksaan({
                         <CardTitle>History Pemeriksaan</CardTitle>
                     </CardHeader>
                     <CardContent className="grid gap-4">
-                        <div className="gap-4 flex flex-col mt-4">
-                            {items && items.length > 0 ? (
-                                items.map((item, index) => (
-                                    <Card key={index}>
-                                        <CardHeader>
-                                            <CardTitle>
-                                                {item.blood_bag ?? "-"}
-                                            </CardTitle>
-                                        </CardHeader>
-                                        <CardContent className="grid gap-1">
-                                            <Table>
-                                                <TableBody>
-                                                    <TableRow>
-                                                        <TableCell className="font-medium w-40 p-0 py-2">
-                                                            <div className="flex items-center gap-2">
-                                                                <Droplets />
-                                                                Golongan Darah
-                                                            </div>
-                                                        </TableCell>
-                                                        <TableCell className="w-1 p-0 px-3">
-                                                            :
-                                                        </TableCell>
-                                                        <TableCell className="p-0">
-                                                            {
-                                                                BLOOD_TYPE.filter(
-                                                                    (val) =>
-                                                                        val.value ==
-                                                                        item.blood_type
-                                                                )[0]?.label
-                                                            }
-                                                        </TableCell>
-                                                    </TableRow>
-                                                    <TableRow>
-                                                        <TableCell className="font-medium p-0 py-2">
-                                                            <div className="flex items-center gap-2">
-                                                                <Syringe />
-                                                                Rhesus
-                                                            </div>
-                                                        </TableCell>
-                                                        <TableCell className="p-0 px-3">
-                                                            :
-                                                        </TableCell>
-                                                        <TableCell className="p-0">
-                                                            {
-                                                                RHESUS.filter(
-                                                                    (val) =>
-                                                                        val.value ==
-                                                                        item.rhesus
-                                                                )[0].label
-                                                            }
-                                                        </TableCell>
-                                                    </TableRow>
-                                                </TableBody>
-                                            </Table>
-                                        </CardContent>
-                                    </Card>
-                                ))
-                            ) : (
-                                <p className="text-muted">No results found.</p>
-                            )}
-                        </div>
+                        <ScrollArea className="h-[70vh] mt-4">
+                            <div className="gap-4 flex flex-col">
+                                {items && items.length > 0 ? (
+                                    items.map((item, index) => (
+                                        <Card key={index}>
+                                            <CardHeader>
+                                                <CardTitle>
+                                                    {item.blood_bag ?? "-"}
+                                                </CardTitle>
+                                            </CardHeader>
+                                            <CardContent className="grid gap-1">
+                                                <Table>
+                                                    <TableBody>
+                                                        <TableRow>
+                                                            <TableCell className="font-medium w-40 p-0 py-2">
+                                                                <div className="flex items-center gap-2">
+                                                                    <Droplets />
+                                                                    Golongan
+                                                                    Darah
+                                                                </div>
+                                                            </TableCell>
+                                                            <TableCell className="w-1 p-0 px-3">
+                                                                :
+                                                            </TableCell>
+                                                            <TableCell className="p-0">
+                                                                {
+                                                                    BLOOD_TYPE.filter(
+                                                                        (val) =>
+                                                                            val.value ==
+                                                                            item.blood_type
+                                                                    )[0]?.label
+                                                                }
+                                                            </TableCell>
+                                                        </TableRow>
+                                                        <TableRow>
+                                                            <TableCell className="font-medium p-0 py-2">
+                                                                <div className="flex items-center gap-2">
+                                                                    <Syringe />
+                                                                    Rhesus
+                                                                </div>
+                                                            </TableCell>
+                                                            <TableCell className="p-0 px-3">
+                                                                :
+                                                            </TableCell>
+                                                            <TableCell className="p-0">
+                                                                {
+                                                                    RHESUS.filter(
+                                                                        (val) =>
+                                                                            val.value ==
+                                                                            item.rhesus
+                                                                    )[0].label
+                                                                }
+                                                            </TableCell>
+                                                        </TableRow>
+                                                    </TableBody>
+                                                </Table>
+                                            </CardContent>
+                                        </Card>
+                                    ))
+                                ) : (
+                                    <p className="text-muted">
+                                        No results found.
+                                    </p>
+                                )}
+                            </div>
+                        </ScrollArea>
                     </CardContent>
                 </Card>
             </div>

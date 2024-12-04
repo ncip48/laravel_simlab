@@ -16,7 +16,13 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { LucideIcon, PencilIcon, PlusCircleIcon } from "lucide-react";
+import {
+    LucideIcon,
+    PencilIcon,
+    PlusCircleIcon,
+    SaveIcon,
+    XCircleIcon,
+} from "lucide-react";
 import LoadingDots from "@/components/loading-dots";
 
 export const ModalAction = ({
@@ -83,6 +89,7 @@ export const ModalAction = ({
                                 variant="destructive"
                                 size="sm"
                             >
+                                <XCircleIcon />
                                 Tutup
                             </Button>
                         </DialogClose>
@@ -97,6 +104,7 @@ export const ModalAction = ({
 export const FormButton = ({ processing }: { processing: boolean }) => {
     return (
         <Button type="submit" disabled={processing} size="sm">
+            <SaveIcon />
             {processing ? <LoadingDots /> : <p>Simpan</p>}
         </Button>
     );
