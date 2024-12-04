@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
+use App\Models\Examination;
 use App\Models\Patient;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -78,7 +79,7 @@ class HasilPemeriksaanController extends Controller
             }
 
             return [
-                'patient' => Patient::where('id', $item['data'][0])->first(),
+                'patient' => Examination::where('blood_bag', $item['data'][9])->with('patient')->first(),
                 'parameters' => $parameters
             ];
         });

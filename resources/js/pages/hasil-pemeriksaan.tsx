@@ -112,7 +112,8 @@ export default function HasilPemeriksaan({
                                         <CardHeader>
                                             <CardTitle>
                                                 Pasien:{" "}
-                                                {result?.patient?.name ?? "-"}
+                                                {result?.patient?.patient
+                                                    ?.name ?? "-"}
                                             </CardTitle>
                                         </CardHeader>
                                         <CardContent className="grid gap-4">
