@@ -15,8 +15,8 @@ abstract class Controller
         // Add id and name for each header item
         $contents = $headers->map(function ($header, $index) {
             return [
-                'id' => $index + 1,  // start id from 1 (index + 1)
-                'data' => $header
+                'id' => $index + 1, // start id from 1 (index + 1)
+                'data' => array_map('trim', $header) // remove extra spaces from each header item
             ];
         });
 

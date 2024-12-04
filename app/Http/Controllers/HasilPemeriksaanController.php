@@ -32,6 +32,7 @@ class HasilPemeriksaanController extends Controller
         $results = $this->getParameterContent($alatId);
         $headers = $this->getParameterHead($alatId);
 
+
         $alats = Device::all()->map(function ($alat) {
             return [
                 'value' => (string)$alat->id,
@@ -39,10 +40,17 @@ class HasilPemeriksaanController extends Controller
             ];
         });
 
+        $results = $results->filter(function ($item) {
+            return $item['data'][0] !== "";
+        });
+
         // Filter results based on date
         $filteredResults = $results->filter(function ($item) use ($searchDate) {
             // Parse $item['data'][2] from 'm-d-Y' to 'Y-m-d' for comparison
-            $itemDate = Carbon::createFromFormat('m-d-Y', $item['data'][2])->format('Y-m-d');
+            if (strpos($item['data'][2], "-") !== false) {
+                $item['data'][2] = str_replace("-", "/", $item['data'][2]);
+            }
+            $itemDate = Carbon::parse($item['data'][2])->format('Y-m-d');
 
             // Only include items where the date matches
             return $itemDate === $searchDate;
