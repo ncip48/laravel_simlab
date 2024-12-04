@@ -6,8 +6,8 @@ import { InputError } from "@/components/ui/input-error";
 import { Label } from "@/components/ui/label";
 import { toasterForm } from "@/lib/utils";
 import { useForm } from "@inertiajs/react";
-import { FormEventHandler, useRef } from "react";
-import { PasienType } from "../pasien/columns";
+import { FormEventHandler, useEffect, useRef } from "react";
+import { FormPemeriksaanType, PasienType } from "../pasien/columns";
 import TextInput from "@/components/text-input";
 import { BatteryFull, Trash2Icon, XCircleIcon } from "lucide-react";
 import LoadingDots from "@/components/loading-dots";
@@ -27,7 +27,13 @@ export const RHESUS = [
     { value: "2", label: "!!" },
 ];
 
-export function FormPemeriksaan({ patient }: { patient: PasienType }) {
+export function FormPemeriksaan({
+    patient,
+    formData,
+}: {
+    patient: PasienType;
+    formData: FormPemeriksaanType;
+}) {
     const formRef = useRef<HTMLFormElement>(null);
     const bloodBagRef = useRef<HTMLInputElement>(null);
 
@@ -35,27 +41,48 @@ export function FormPemeriksaan({ patient }: { patient: PasienType }) {
         data,
         setData,
         post,
+        patch,
         errors,
         processing,
         recentlySuccessful,
         reset,
     } = useForm({
+        id: formData ? formData.id : null,
         patient_id: patient.id || 0,
-        name: "",
         blood_type: "",
         rhesus: "",
         blood_bag: "",
     });
 
+    useEffect(() => {
+        setData({
+            id: formData.id || 0,
+            patient_id: formData.patient_id || 0,
+            blood_bag: formData.blood_bag || "",
+            blood_type: formData.blood_type?.toString() || "",
+            rhesus: formData.rhesus?.toString() || "",
+        });
+    }, [formData]);
+
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
+        console.log(formData);
 
-        post(route("pemeriksaan.store"), {
-            preserveScroll: true,
-            preserveState: true,
-            onSuccess: () => onSuccess(),
-            onError: () => onFocusBloodBag(),
-        });
+        if (formData.id) {
+            patch(route("pemeriksaan.update", data.id || 0), {
+                preserveScroll: true,
+                preserveState: true,
+                onSuccess: () => onSuccess(),
+                onError: () => onFocusBloodBag(),
+            });
+        } else {
+            post(route("pemeriksaan.store"), {
+                preserveScroll: true,
+                preserveState: true,
+                onSuccess: () => onSuccess(),
+                onError: () => onFocusBloodBag(),
+            });
+        }
     };
 
     const onFocusBloodBag = () => {
@@ -79,6 +106,7 @@ export function FormPemeriksaan({ patient }: { patient: PasienType }) {
                 <TextInput
                     title="No Kantong"
                     name="blood_bag"
+                    value={data.blood_bag || ""}
                     onChange={(e) => setData("blood_bag", e.target.value)}
                     autoFocus
                     ref={bloodBagRef}
@@ -88,13 +116,14 @@ export function FormPemeriksaan({ patient }: { patient: PasienType }) {
                         }
                     }}
                     error={errors.blood_bag}
+                    disabled={!!data.blood_bag}
                 />
                 <div>
                     <Label htmlFor="blood_type">Golongan Darah</Label>
                     <SelectOption
                         title="Golongan Darah"
                         items={BLOOD_TYPE}
-                        value=""
+                        value={data.blood_type}
                         onChange={(e) => {
                             setData("blood_type", e);
                         }}
@@ -107,7 +136,7 @@ export function FormPemeriksaan({ patient }: { patient: PasienType }) {
                     <SelectOption
                         title=" Rhesus"
                         items={RHESUS}
-                        value=""
+                        value={data.rhesus}
                         onChange={(e) => setData("rhesus", e)}
                         wFull
                     />

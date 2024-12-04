@@ -3,12 +3,19 @@ import { Head, Link } from "@inertiajs/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "@/components/data-table";
 import { Button } from "@/components/ui/button";
-import { ActivitySquareIcon, Droplets, Syringe } from "lucide-react";
+import {
+    ActivitySquareIcon,
+    Droplets,
+    EditIcon,
+    PencilLineIcon,
+    Syringe,
+} from "lucide-react";
 import { BLOOD_TYPE, FormPemeriksaan, RHESUS } from "./form";
-import { PasienType } from "../pasien/columns";
+import { FormPemeriksaanType, PasienType } from "../pasien/columns";
 import { PemeriksaanType } from "./columns";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useState } from "react";
 
 export default function Pemeriksaan({
     items,
@@ -17,6 +24,10 @@ export default function Pemeriksaan({
     items: PemeriksaanType[];
     patient: PasienType;
 }) {
+    const [form, setForm] = useState<FormPemeriksaanType>(
+        () => ({} as FormPemeriksaanType)
+    );
+
     return (
         <AuthenticatedLayout header="Pemeriksaan">
             <Head title="Pemeriksaan" />
@@ -60,7 +71,10 @@ export default function Pemeriksaan({
                     </Card>
                     <Card className="mt-3">
                         <CardContent className="grid gap-4">
-                            <FormPemeriksaan patient={patient} />
+                            <FormPemeriksaan
+                                patient={patient}
+                                formData={form}
+                            />
                         </CardContent>
                     </Card>
                 </div>
@@ -75,8 +89,24 @@ export default function Pemeriksaan({
                                     items.map((item, index) => (
                                         <Card key={index}>
                                             <CardHeader>
-                                                <CardTitle>
+                                                <CardTitle className="flex gap-3 items-center">
                                                     {item.blood_bag ?? "-"}
+                                                    <EditIcon
+                                                        size={16}
+                                                        className="cursor-pointer"
+                                                        onClick={() => {
+                                                            setForm({
+                                                                ...item,
+                                                                id:
+                                                                    item.id ??
+                                                                    0,
+                                                                patient_id:
+                                                                    item.patient
+                                                                        .id ??
+                                                                    0,
+                                                            });
+                                                        }}
+                                                    />
                                                 </CardTitle>
                                             </CardHeader>
                                             <CardContent className="grid gap-1">

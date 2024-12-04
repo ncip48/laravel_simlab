@@ -24,10 +24,7 @@ export function SelectOption({
     wFull?: boolean;
 }) {
     return (
-        <Select
-            onValueChange={onChange}
-            defaultValue={title ? value : items[0].value}
-        >
+        <Select onValueChange={onChange} value={title ? value : items[0].value}>
             <SelectTrigger className={wFull ? "w-full" : "w-[180px]"}>
                 <SelectValue placeholder={title} />
             </SelectTrigger>

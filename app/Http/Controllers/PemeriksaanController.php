@@ -89,7 +89,15 @@ class PemeriksaanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'blood_type' => 'required',
+            'rhesus' => 'required',
+        ], [
+            'blood_type.required' => 'Golongan darah harus dipilih',
+            'rhesus.required' => 'Rhesus harus dipilih',
+        ]);
+
+        Examination::where('id', $id)->update($request->all());
     }
 
     /**

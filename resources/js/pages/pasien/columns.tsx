@@ -17,6 +17,14 @@ export type PasienType = {
     age: string | null;
 };
 
+export type FormPemeriksaanType = {
+    id: number;
+    patient_id: number;
+    blood_type: string | null;
+    blood_bag: string | null;
+    rhesus: string | null;
+};
+
 export const columns: ColumnDef<PasienType>[] = [
     {
         accessorKey: "identity_number",
